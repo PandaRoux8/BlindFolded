@@ -4,6 +4,7 @@ from gamePackage.sprite.ground import Ground
 from gamePackage.sprite.npc import NPC
 from gamePackage.sprite.player import Player
 from gamePackage.sprite.wall import Wall
+from gamePackage.sprite.hole import Hole
 
 
 class Map(object):
@@ -18,13 +19,20 @@ class Map(object):
         for x, row in enumerate(self.map.map):
             for y, col in enumerate(row):
                 # Hardcode -> 2nd tile in the tilset are the walls
-                if col-1 == 0 or col-1 <= 7:
+                if col-1 == 0:
                     wall_values = {
                         'tile': self.map.tile[col-1],
                         'x': x*32,
                         'y': y*32,
                     }
                     self.render_wall(wall_values)
+                if col-1 == 1:
+                    hole_values = {
+                        'tile': self.map.tile[col-1],
+                        'x': x*32,
+                        'y': y*32,
+                    }
+                    self.render_hole(hole_values)
 
                 # Hardcode -> 16 tiles is the character sprite
                 if col-1 == 16:
@@ -64,6 +72,11 @@ class Map(object):
         self.__game.wall_sprites.add(wall)
         self.__game.all_sprites.add(wall)
 
+    def render_hole(self, values):
+        hole = Hole(self.__game, values['tile'], values['x'], values['y'])
+        self.__game.all_sprites.add(hole)
+        self.__game.hole_sprites.add(hole)
+
     def render_npc(self, values):
         npc = NPC(self.__game, values['tile'], values['x'], values['y'])
         self.npcs.append(npc)
@@ -76,3 +89,4 @@ class Map(object):
         self.__game.all_sprites.add(player)
         self.__game.player_sprite.add(player)
         player.walls = self.__game.wall_sprites
+        player.holes = self.__game.hole_sprites

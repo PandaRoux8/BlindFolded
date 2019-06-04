@@ -22,6 +22,7 @@ class Game(object):
         self.ground_sprite = None
         self.wall_sprites = None
         self.npc_sprites = None
+        self.hole_sprites = None
         # Character of the player
         self.player = None
         # Tile height and Tile width
@@ -41,8 +42,9 @@ class Game(object):
         self.ground_sprite = pygame.sprite.Group()
         self.wall_sprites = pygame.sprite.Group()
         self.npc_sprites = pygame.sprite.Group()
-        # Load the map
+        self.hole_sprites = pygame.sprite.Group()
 
+        # Load the map
         self.map = Map(self, "../map/map_1.tmx")
 
         # # Static init of a NPC -> Dynamic NPC from map

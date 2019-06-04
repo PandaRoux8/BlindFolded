@@ -22,6 +22,7 @@ class Player(pygame.sprite.Sprite):
         # Vector for moving the Player
         self.vx, self.vy = 0, 0
         self.walls = None
+        self.holes = None
 
     @property
     def direction(self):
@@ -84,7 +85,7 @@ class Player(pygame.sprite.Sprite):
         Do it with x or y axis because if we do both at one time it does strange things. (ie the Player teleport)
         """
         # print("a", self, self.walls)
-        block_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
+        block_hit_list = pygame.sprite.spritecollide(self, self.walls, dokill=False)
         for block in block_hit_list:
             if axis == 'x':
                 if self.vx > 0:
@@ -98,6 +99,14 @@ class Player(pygame.sprite.Sprite):
                 else:
                     self.rect.top = block.rect.bottom
 
+    def fall_in_hole(self):
+        """
+        Check if the player has fallen into a hole
+        """
+        block_hit_list = pygame.sprite.spritecollide(self, self.holes, dokill=False)
+        for block in block_hit_list:
+            print("T'es tombé bitch")
+
     def update(self):
         """
         Update the character position
@@ -107,3 +116,4 @@ class Player(pygame.sprite.Sprite):
         self.collide_with_walls('x')
         self.rect.y += self.vy
         self.collide_with_walls('y')
+        self.fall_in_hole()

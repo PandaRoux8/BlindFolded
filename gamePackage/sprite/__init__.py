@@ -3,3 +3,4 @@ from . import ground
 from . import npc
 from . import player
 from . import wall
+from . import hole

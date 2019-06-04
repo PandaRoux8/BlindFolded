@@ -14,17 +14,21 @@ Things to implement for the game :
  Map class :
  
     - A special tile to go from a map to another (Loads the map)
-    - Replace the tile where the player spawned by a ground tile
+    - Replace the tile where the player spawned by a ground tile -> Check this with layer maybe
 
-Tiles :
+Type of tiles :
  
     - Pit
+    - Ground
+    - Action Tile (Bumper, map rotation etc.)
+    
 
 Character class:
 
     - Action
     - Give action to the character (plant a tree)
     - Direction of the char (display)
+
 
 
 General idea :
@@ -45,4 +49,13 @@ Item on the map :
     - Inverseur de touches
     - ? Piège à désactiver par P2
  
-TEST AUTO COMMIT 2
+
+
+OTHERS :
+
+Make a script to put header on each python file.
+
+# Name      : Schluchter Jules
+# Mail      :
+# Date      : <today>
+# Module    : BlindFolded Game  
