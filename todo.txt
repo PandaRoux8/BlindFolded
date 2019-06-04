@@ -1,0 +1,27 @@
+
+Things to implement for the game :
+
+  - A main menu
+  - An option menu (resolution, keys, fps, fullscreen/windowed)
+  - An ESC menu -> To leave the game and go to the main menu
+  - A button to go to another world
+  - A button to show a map
+
+  - Give action to the character (plant a tree)
+  - A save file for the configuration
+  - A save file for the game
+
+  - Character class
+    - Action
+    - Direction of the char
+
+  - PNJ class
+    - Talk to PNJ
+
+
+  - Items
+  - Inventory (?)
+
+
++++ IMPORTANT 
+Pause the game when something hit the player : https://www.youtube.com/watch?v=216_5nu4aVQ

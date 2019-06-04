@@ -1,0 +1,11 @@
+
+
+	
+1st line is for the walls
+2nd line is for the ground + Change map tile
+3rd line is for the NPC
+4th line for charachter
+5th movable object
+6th items
+7th ennemy 
+8th 
