@@ -43,7 +43,7 @@ class Game(object):
         self.npc_sprites = pygame.sprite.Group()
         # Load the map
 
-        self.map = Map(self, "./map/main_map.tmx")
+        self.map = Map(self, "../map/map_1.tmx")
 
         # # Static init of a NPC -> Dynamic NPC from map
         # npc = NPC(self, 128, 128)

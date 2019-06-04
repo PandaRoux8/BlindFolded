@@ -62,17 +62,18 @@ class MapParser(object):
         return map
 
     def get_tile(self):
-        tile_dir = "./tileset/"
-        tile_file = self.__root.find('tileset').attrib.get('source')
-        tile_path = tile_dir + tile_file
+        # tile_dir = "./map/"
+        # tile_file = self.__root.find('tileset').attrib.get('source')
+        # tile_path = tile_dir + tile_file
+        tile_path = "/opt/BlindFolded/map/tileset/default_tileset.tsx"  # TODO : FIX HARDCODE
         return self.split_tile(tile_path)
 
     def split_tile(self, tile_file):
         tile = ET.parse(tile_file)
         image = tile.getroot().find('image')
         source_img = image.attrib.get('source')
-        print(source_img)
-        image = pygame.image.load(source_img).convert()
+        img_path = "/opt/BlindFolded/map/tileset/" + source_img  # TODO : FIX HARDCODE
+        image = pygame.image.load(img_path).convert()
         image_width, image_height = image.get_size()
         tiles = []
 
