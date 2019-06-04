@@ -45,3 +45,4 @@ Item on the map :
     - Inverseur de touches
     - ? Piège à désactiver par P2
  
+TEST AUTO COMMIT
