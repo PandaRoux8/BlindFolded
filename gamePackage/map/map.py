@@ -11,7 +11,6 @@ class Map(object):
     def __init__(self, game, map_file):
         self.map = MapParser(map_file)
         self.__game = game
-        self.npcs = []
         self.render_map()
 
     def render_map(self):
@@ -56,12 +55,14 @@ class Map(object):
                         'tile': self.map.tile[col-1],
                         'x': x*32,
                         'y': y*32,
+                        'sprites': ['ground_sprites']
                     }
                     self.render_ground(ground_values)
 
         if player_values:
             self.render_player(player_values)
 
+    # TODO : Make only 1 method for all these
     def render_ground(self, values):
         ground = Ground(self.__game, values['tile'], values['x'], values['y'])
         self.__game.ground_sprite.add(ground)

@@ -49,7 +49,7 @@ Item on the map :
     - Inverseur de touches
     - ? Piège à désactiver par P2
  
-
+SOCKET : https://realpython.com/python-sockets/#echo-client-and-server
 
 OTHERS :
 

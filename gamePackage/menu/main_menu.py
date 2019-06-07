@@ -19,8 +19,8 @@ class MainMenu(pygameMenu.menu.Menu):
         # Initialize pygame
         pygame.init()
         # Screen size
-        self.width = 1600
-        self.height = 900
+        self.width = 832
+        self.height = 832
         # Init the screen size
         self.screen = pygame.display.set_mode((self.width, self.height))
         # Set title of the window

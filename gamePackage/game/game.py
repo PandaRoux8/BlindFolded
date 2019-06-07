@@ -61,18 +61,18 @@ class Game(object):
         # self.all_sprites.add(self.player)
 
         # Start the game
-        self.run_game()
+        self.__run_game()
 
-    def run_game(self):
+    def __run_game(self):
         while True:
             # Tick for the framerate
             self.clock.tick(self.framerate)
-            self.events()
+            self.__events()
             self.update()
             self.draw()
             # pygame.display.update()
 
-    def events(self):
+    def __events(self):
         """
         Catch leave events
         """
@@ -94,5 +94,9 @@ class Game(object):
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
 
-    def show_start_screen(self):
-        pass
+    def game_over(self):
+        """
+        Display game over on screen
+        Restart a new game
+        :return:
+        """
