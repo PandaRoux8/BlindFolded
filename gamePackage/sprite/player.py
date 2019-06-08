@@ -23,6 +23,7 @@ class Player(pygame.sprite.Sprite):
         self.vx, self.vy = 0, 0
         self.walls = None
         self.holes = None
+        self.finish_tile = None
 
     @property
     def direction(self):
@@ -105,7 +106,12 @@ class Player(pygame.sprite.Sprite):
         """
         block_hit_list = pygame.sprite.spritecollide(self, self.holes, dokill=False)
         for block in block_hit_list:
-            print("T'es tombé bitch")
+            self.__game.game_over()
+
+    def finish_map(self):
+        block_hit_list = pygame.sprite.spritecollide(self, self.finish_tile, dokill=False)
+        for block in block_hit_list:
+            self.__game.load_next_map()
 
     def update(self):
         """
@@ -117,3 +123,4 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.vy
         self.collide_with_walls('y')
         self.fall_in_hole()
+        self.finish_map()

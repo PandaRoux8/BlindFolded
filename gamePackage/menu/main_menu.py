@@ -31,12 +31,18 @@ class MainMenu(pygameMenu.menu.Menu):
         self.display_menu()
 
     def display_menu(self):
-        self.add_option("New game", lambda: Game(self.screen))
+        self.add_option("New game", lambda: self.start_game())
         # TODO : Select a save file
-        self.add_option("Load game", lambda: Game(self.screen))
+        self.add_option("Load game", lambda: self.start_game())
         self.add_option("Options", lambda: OptionsMenu.get_instance(self.screen, (self.width, self.height)))
         self.add_option("Leave game", PYGAME_MENU_EXIT)
         self.enable()
         events = pygame.event.get()
         self.mainloop(events)
+
+    def start_game(self):
+        self.disable()
+        Game.get_instance(self.screen)
+
+
 

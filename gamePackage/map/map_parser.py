@@ -91,7 +91,6 @@ class MapParser(object):
                 rect = (y*self._tileWidth, x*self._tileHeight,
                         self._tileWidth, self._tileHeight)
                 tiles.append(image.subsurface(rect))
-        print(tiles)
         return tiles
 
     def display_tile(self):

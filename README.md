@@ -10,11 +10,18 @@ Things to implement for the game :
 
   - A save file for the configuration
   - A save file for the game
+  - Create a connector matching tiles and their position
+    ->  Wall = 0, Hole = 1, etc. 
+    
+  - Optimize the game check update/draw method in game
 
  Map class :
  
     - A special tile to go from a map to another (Loads the map)
     - Replace the tile where the player spawned by a ground tile -> Check this with layer maybe
+
+ Map Parser class :
+    - The display is wrong -> The screen is flipped in a weird way
 
 Type of tiles :
  
@@ -41,13 +48,14 @@ Item on the map :
 
     - Bumper
     - Bridge
-    - Button for map rotation
     - Téléporteur (différentes couleurs vu seulement par P1)
     - Projecteur de lumières pour les 2 joueurs (Zone affiché différents parfois)
     - Tourelle statique (à désactiver par P2 en mettant un objet devant) 
     - Clé
     - Inverseur de touches
     - ? Piège à désactiver par P2
+ 
+    - Puzzle avec forme (Keep talking and nobody explode)
  
 SOCKET : https://realpython.com/python-sockets/#echo-client-and-server
 
