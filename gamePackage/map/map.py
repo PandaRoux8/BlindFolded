@@ -37,20 +37,26 @@ class Map(object):
         res = None
         if tile_index == 0:
             res = Wall(self.__game, values['tile'], values['x'], values['y'])
+            # TODO : Place these in the linked class
             self.__game.wall_sprites.add(res)
             self.__game.static_sprites.add(res)
             self.__game.all_sprites.add(res)
         elif tile_index == 1:
             res = Hole(self.__game, values['tile'], values['x'], values['y'])
+            # TODO : Place these in the linked class
             self.__game.hole_sprites.add(res)
             self.__game.static_sprites.add(res)
             self.__game.all_sprites.add(res)
         elif tile_index == 2:
-            res = Turret(self.__game, values['tile'], values['x'], values['y'])
+            # Careful here is hardcode -> The shot sprite of the turret has to be the tile next to the turret
+            # print("xx", self.map.tile[tile_index+1])
+            res = Turret(self.__game, values['tile'], values['x'], values['y'], self.map.tile[tile_index+1])
+            # TODO : Place these in the linked class
             self.__game.static_sprites.add(res)
             self.__game.all_sprites.add(res)
         elif tile_index == 8:
             res = Ground(self.__game, values['tile'], values['x'], values['y'])
+            # TODO : Place these in the linked class
             self.__game.ground_sprite.add(res)
             self.__game.static_sprites.add(res)
             self.__game.all_sprites.add(res)

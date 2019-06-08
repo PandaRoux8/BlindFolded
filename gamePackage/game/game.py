@@ -75,6 +75,7 @@ class Game(object):
         """
         # FIXME : For now I draw the Ground sprite on each tick to override where the player image was
         self.ground_sprite.update()
+        self.hole_sprites.update()
         # Draw the player after all_sprites so it's displayed on top of the others
         self.player_sprite.update()
         pygame.display.update()
@@ -86,6 +87,7 @@ class Game(object):
 
         # FIXME : For now I draw the Ground sprite on each tick to override where the player image was
         self.ground_sprite.draw(self.screen)
+        self.hole_sprites.draw(self.screen)
         # Draw the player after all_sprites so it's displayed on top of the others
         self.player_sprite.draw(self.screen)
 
