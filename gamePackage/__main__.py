@@ -1,5 +1,5 @@
 # coding: utf-8
-from gamePackage.menu.main_menu import MainMenu
+from gamePackage.game import Game
 
 if __name__ == "__main__":
-    MainMenu.get_instance()
+    game = Game()

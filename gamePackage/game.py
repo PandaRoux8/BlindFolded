@@ -3,23 +3,28 @@ import sys
 import pygame
 from pygame.locals import *
 from gamePackage.map.map import Map
+from gamePackage.menu.main_menu import MainMenu
+from gamePackage.singleton import Singleton
 
 
-class Game(object):
-    __instance = None
+class Game(Singleton):
 
-    @staticmethod
-    def get_instance(screen):
-        if not Game.__instance:
-            Game(screen)
-        return Game.__instance
-
-    def __init__(self, screen):
-        # Screen used
-        self.screen = screen
+    def __init__(self):
+        MainMenu()
+        # Initialize pygame
+        pygame.init()
+        # TODO : get this from a file
+        # Screen size
+        self.width = 832
+        self.height = 832
+        # Init the screen size
+        self.screen = pygame.display.set_mode((self.width, self.height))
         # Frame rate (clock tick in the while true of the game)
         self.framerate = 60
         self.clock = pygame.time.Clock()
+        MainMenu.get_instance()
+
+
         # Map loaded in the game
         self.map = None
         # Set the sprite groups
@@ -32,9 +37,7 @@ class Game(object):
         self.finish_sprite = pygame.sprite.Group()
         # Character of the player
         self.player = None
-        # Tile height and Tile width
-        self.tile_height = 32
-        self.tile_width = 32
+
         # Select a font for the game
         pygame.font.init()
         self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)

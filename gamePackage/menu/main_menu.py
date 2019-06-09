@@ -2,18 +2,12 @@
 import pygame
 import pygameMenu
 from pygameMenu.locals import *
-from gamePackage.game.game import Game
+from gamePackage.game import Game
 from gamePackage.menu.options import OptionsMenu
+from gamePackage.singleton import Singleton
 
 
-class MainMenu(pygameMenu.menu.Menu):
-    __instance = None
-
-    @staticmethod
-    def get_instance():
-        if not MainMenu.__instance:
-            MainMenu()
-        return MainMenu.__instance
+class MainMenu(pygameMenu.menu.Menu, Singleton):
 
     def __init__(self):
         # Initialize pygame
