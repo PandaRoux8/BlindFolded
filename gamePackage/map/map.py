@@ -50,7 +50,7 @@ class Map(object):
         elif tile_index == 2:
             # Careful here is hardcode -> The shot sprite of the turret has to be the tile next to the turret
             # print("xx", self.map.tile[tile_index+1])
-            res = Turret(self.__game, values['tile'], values['x'], values['y'], self.map.tile[tile_index+1])
+            res = Turret(self.__game, values['tile'], values['x'], values['y'], self.map.tile[tile_index+1], False)
             # TODO : Place these in the linked class
             self.__game.static_sprites.add(res)
             self.__game.all_sprites.add(res)

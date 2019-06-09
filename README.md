@@ -61,6 +61,9 @@ SOCKET : https://realpython.com/python-sockets/#echo-client-and-server
 
 OTHERS :
 
+ - Get a tileset with only black tile for P1 (except char) 
+ - Standard tileset for P2
+
 Make a script to put header on each python file.
 
 # Name      : Schluchter Jules
