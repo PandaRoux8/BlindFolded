@@ -1,18 +1,17 @@
 # coding: utf-8
 import sys
 import pygame
-from pygame.locals import *
 from gamePackage.map.map import Map
 from gamePackage.menu.main_menu import MainMenu
-from gamePackage.singleton import Singleton
 
 
-class Game(Singleton):
+class Game(object):
 
-    def __init__(self):
-        MainMenu()
+    def __init__(self, from_death=False):
         # Initialize pygame
         pygame.init()
+        # Set title of the window
+        pygame.display.set_caption('Blindfolded')
         # TODO : get this from a file
         # Screen size
         self.width = 832
@@ -20,83 +19,93 @@ class Game(Singleton):
         # Init the screen size
         self.screen = pygame.display.set_mode((self.width, self.height))
         # Frame rate (clock tick in the while true of the game)
-        self.framerate = 60
+        self.framerate = 15
         self.clock = pygame.time.Clock()
-        MainMenu.get_instance()
-
-
+        # Save the main menu instance
+        self.main_menu = None
         # Map loaded in the game
         self.map = None
+        # Character of the player
+        self.player = None
+
         # Set the sprite groups
         self.all_sprites = pygame.sprite.Group()
         self.static_sprites = pygame.sprite.Group()
-        self.player_sprite = pygame.sprite.Group()
-        self.ground_sprite = pygame.sprite.Group()
-        self.wall_sprites = pygame.sprite.Group()
-        self.hole_sprites = pygame.sprite.Group()
+        self.block_sprites = pygame.sprite.Group()
+        self.kill_sprites = pygame.sprite.Group()
         self.finish_sprite = pygame.sprite.Group()
-        # Character of the player
-        self.player = None
+        self.teleporter_sprites = pygame.sprite.Group()
+        self.player_sprite = pygame.sprite.Group()
 
         # Select a font for the game
         pygame.font.init()
         self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
-        # When creating an instance start a new game
-        self.new_game()
+        # # When creating an instance start a new game
+        # self.new_game()
+        if not from_death:
+            self.call_main_menu()
+        self.__run_game()
+
+    def call_main_menu(self):
+        if not self.main_menu:
+            self.main_menu = MainMenu(self.screen, (self.width, self.height))
+        else:
+            self.main_menu.enable()
 
     def new_game(self):
         # Load the map
         self.map = Map(self, "../map/map_1.tmx")
-        self.draw_static_sprites()
-        # pygame.display.update()
-
-        # Start the game
-        self.__run_game()
+        self.map.draw_static_sprites()
 
     def __run_game(self):
+        self.new_game()
         while True:
-            # Tick for the framerate
             self.clock.tick(self.framerate)
-            self.__events()
+            self.player.check_exit_game()
+            # Tick for the framerate
             # TODO : FIXME : Find out how this really works so it can be optimized (drawing updating etc.)
-            self.draw()
-            self.update()
-            # pygame.display.update()
+            self.map.draw()
+            self.map.update()
 
-    def __events(self):
+    def collide_with_walls(self, axis=None):
         """
-        Catch leave events
+        Check if the Character collide with any wall.
+        Block the character in front of the wall if it's the case.
+        Do it with x or y axis because if we do both at one time it does strange things. (ie the Player teleport)
         """
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
+        # print("a", self, self.walls)
+        block_hit_list = pygame.sprite.spritecollide(self.player, self.block_sprites, dokill=False)
+        for block in block_hit_list:
+            if axis == 'x':
+                if self.player.vx > 0:
+                    self.player.rect.right = block.rect.left
+                else:
+                    self.player.rect.left = block.rect.right
 
-    def update(self):
-        """
-        Update all the sprites
-        """
-        # FIXME : For now I draw the Ground sprite on each tick to override where the player image was
-        self.ground_sprite.update()
-        self.hole_sprites.update()
-        # Draw the player after all_sprites so it's displayed on top of the others
-        self.player_sprite.update()
-        pygame.display.update()
+            if axis == 'y':
+                if self.player.vy > 0:
+                    self.player.rect.bottom = block.rect.top
+                else:
+                    self.player.rect.top = block.rect.bottom
 
-    def draw(self):
+    def kill_on_collide(self):
         """
-        Draw all the sprites
+        Check if the player has fallen into a hole
         """
+        block_hit_list = pygame.sprite.spritecollide(self.player, self.kill_sprites, dokill=False)
+        if block_hit_list:
+            self.game_over()
 
-        # FIXME : For now I draw the Ground sprite on each tick to override where the player image was
-        self.ground_sprite.draw(self.screen)
-        self.hole_sprites.draw(self.screen)
-        # Draw the player after all_sprites so it's displayed on top of the others
-        self.player_sprite.draw(self.screen)
+    def teleport_player(self):
+        block_hit_list = pygame.sprite.spritecollide(self.player, self.teleporter_sprites, dokill=False)
+        if len(block_hit_list) == 1 and self.player.has_moved:
+            self.player.rect.x = block_hit_list[0].destination_x
+            self.player.rect.y = block_hit_list[0].destination_y
 
-    def draw_static_sprites(self):
-        self.static_sprites.draw(self.screen)
-        self.static_sprites.update(self.screen)
+    def finish_map(self):
+        block_hit_list = pygame.sprite.spritecollide(self.player, self.finish_sprite, dokill=False)
+        if block_hit_list:
+            self.load_next_map()
 
     def game_over(self):
         """
@@ -123,10 +132,8 @@ class Game(Singleton):
         Reload a new game on the same map
         Delete the old instance of the game and start a new one
         """
-        screen = self.screen
-        game = Game.get_instance(screen)
-        del game
-        Game.get_instance(screen)
+        del self
+        Game(from_death=True)
 
     def load_next_map(self):
         text = self.font.render("GOOD JOB ", 1, (255, 255, 255))
@@ -140,3 +147,7 @@ class Game(Singleton):
             pygame.display.flip()
             self.clock.tick(30)
         self.reload_game()
+
+    def exit_game(self):
+        pygame.quit()
+        sys.exit()

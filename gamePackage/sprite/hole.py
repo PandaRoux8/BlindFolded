@@ -11,3 +11,8 @@ class Hole(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+        # Add to sprites group
+        game.kill_sprites.add(self)
+        game.static_sprites.add(self)
+        game.all_sprites.add(self)

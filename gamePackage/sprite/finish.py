@@ -11,3 +11,7 @@ class Finish(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+        game.static_sprites.add(self)
+        game.all_sprites.add(self)
+        game.finish_sprite.add(self)

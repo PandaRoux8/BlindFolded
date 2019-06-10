@@ -6,14 +6,6 @@ from gamePackage.menu.keys_menu import KeysMenu
 
 # Singleton object
 class OptionsMenu(pygameMenu.menu.Menu):
-    __instance = None
-
-    @staticmethod
-    def get_instance(screen, resolution):
-        if not OptionsMenu.__instance:
-            OptionsMenu(screen, resolution)
-        return OptionsMenu.__instance
-
     def __init__(self, screen, resolution):
         self.screen = screen
         self.width = resolution[0]

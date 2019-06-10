@@ -1,5 +1,6 @@
 # coding: utf-8
 import pygame
+from pygame.locals import *
 from gamePackage.menu.ingame_menu import InGameMenu
 
 
@@ -15,54 +16,59 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self._direction = 'up'
+        # self._direction = 'up'
         # Speed of the Player
-        self.speed = 8
+        self.speed = 32
 
         # Vector for moving the Player
         self.vx, self.vy = 0, 0
-        self.walls = None
-        self.holes = None
-        self.finish_tile = None
 
-    @property
-    def direction(self):
-        return self._direction
+        self.has_moved = True
 
-    @direction.setter
-    def direction(self, value):
-        if self._direction != value:
-            self._direction = value
-            self.change_direction()
+        game.player = self
+        game.player_sprite.add(self)
 
-    def change_direction(self):
-        self.image = pygame.transform.flip(self.image, False, True)
+    # @property
+    # def direction(self):
+    #     return self._direction
+    #
+    # @direction.setter
+    # def direction(self, value):
+    #     if self._direction != value:
+    #         self._direction = value
+    #         self.change_direction()
+    #
+    # def change_direction(self):
+    #     self.image = pygame.transform.flip(self.image, False, True)
 
     def move_player(self):
         self.vx, self.vy = 0, 0
         keys = pygame.key.get_pressed()
+
         # Up
         if keys[pygame.K_w]:
             self.vy = -self.speed
-            self.direction = 'up'
+            # self.direction = 'up'
+            self.has_moved = True
         # Down
         if keys[pygame.K_s]:
             self.vy = self.speed
-            self.direction = 'down'
+            # self.direction = 'down'
+            self.has_moved = True
         # Left
         if keys[pygame.K_a]:
             self.vx = -self.speed
-            self.direction = 'left'
-
+            # self.direction = 'left'
+            self.has_moved = True
         # Right
         if keys[pygame.K_d]:
             self.vx = self.speed
-            self.direction = 'right'
+            # self.direction = 'right'
+            self.has_moved = True
 
-        if keys[pygame.K_f]:
-            # Check surrounding
-            self.check_surrounding()
-            # if pnj -> Talk
+        # if keys[pygame.K_f]:
+        #     # Check surrounding
+        #     self.check_surrounding()
 
         # Go to escape menu
         if keys[pygame.K_ESCAPE]:
@@ -74,44 +80,10 @@ class Player(pygame.sprite.Sprite):
             self.vx *= 0.75
             self.vy *= 0.75
 
-    def check_surrounding(self):
-        for npc in self.__game.map.npcs:
-            if npc.rect.x == self.rect.x or npc.rect.y == self.rect.y:
-                npc.talk()
-
-    def collide_with_walls(self, axis=None):
-        """
-        Check if the Character collide with any wall.
-        Block the character in front of the wall if it's the case.
-        Do it with x or y axis because if we do both at one time it does strange things. (ie the Player teleport)
-        """
-        # print("a", self, self.walls)
-        block_hit_list = pygame.sprite.spritecollide(self, self.walls, dokill=False)
-        for block in block_hit_list:
-            if axis == 'x':
-                if self.vx > 0:
-                    self.rect.right = block.rect.left
-                else:
-                    self.rect.left = block.rect.right
-
-            if axis == 'y':
-                if self.vy > 0:
-                    self.rect.bottom = block.rect.top
-                else:
-                    self.rect.top = block.rect.bottom
-
-    def fall_in_hole(self):
-        """
-        Check if the player has fallen into a hole
-        """
-        block_hit_list = pygame.sprite.spritecollide(self, self.holes, dokill=False)
-        for block in block_hit_list:
-            self.__game.game_over()
-
-    def finish_map(self):
-        block_hit_list = pygame.sprite.spritecollide(self, self.finish_tile, dokill=False)
-        for block in block_hit_list:
-            self.__game.load_next_map()
+    # def check_surrounding(self):
+    #     for npc in self.__game.:
+    #         if npc.rect.x == self.rect.x or npc.rect.y == self.rect.y:
+    #             npc.talk()
 
     def update(self):
         """
@@ -119,8 +91,15 @@ class Player(pygame.sprite.Sprite):
         """
         self.move_player()
         self.rect.x += self.vx
-        self.collide_with_walls('x')
+        self.__game.collide_with_walls('x')
         self.rect.y += self.vy
-        self.collide_with_walls('y')
-        self.fall_in_hole()
-        self.finish_map()
+        self.__game.collide_with_walls('y')
+        self.__game.kill_on_collide()
+        self.__game.teleport_player()
+        self.__game.finish_map()
+
+    def check_exit_game(self):
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                self.__game.exit_game()
+
