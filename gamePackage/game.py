@@ -73,7 +73,6 @@ class Game(object):
         Block the character in front of the wall if it's the case.
         Do it with x or y axis because if we do both at one time it does strange things. (ie the Player teleport)
         """
-        # print("a", self, self.walls)
         block_hit_list = pygame.sprite.spritecollide(self.player, self.block_sprites, dokill=False)
         for block in block_hit_list:
             if axis == 'x':

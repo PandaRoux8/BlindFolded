@@ -13,7 +13,7 @@ from gamePackage.sprite.teleporter import TeleporterManager, Teleporter
 class Map(object):
     def __init__(self, game, map_file):
         self.map = MapParser(map_file)
-        self.game = game
+        self.__game = game
         self.render_map()
 
     def render_map(self):
@@ -29,6 +29,11 @@ class Map(object):
         self.map_verification(tp_manager)
 
     def map_verification(self, tp_manager):
+        """
+        Do the required check for the map to be sure it's element are good.
+        For example we check that there's a set of 2 telporter
+        :param tp_manager: .TeleporteManager
+        """
         tp_manager.check_teleporter()
 
     def render_tiles(self, tile_index, values, tp_manager):
@@ -39,30 +44,31 @@ class Map(object):
                         1. pygame.Surface the tile image
                         2. int The x position
                         3. int The y position
+        :param tp_manager: TeleporterManager object
         :return: The object created
         """
         res = None
         if tile_index == 0:
-            res = Wall(self.game, values['tile'], values['x'], values['y'])
+            res = Wall(self.__game, values['tile'], values['x'], values['y'])
         elif tile_index == 1:
-            res = Hole(self.game, values['tile'], values['x'], values['y'])
+            res = Hole(self.__game, values['tile'], values['x'], values['y'])
         elif tile_index == 2:
             # Careful here is hardcode -> The shot sprite of the turret has to be the tile next to the turret
             # print("xx", self.map.tile[tile_index+1])
-            res = Turret(self.game, values['tile'], values['x'], values['y'], self.map.tile[tile_index+1], False)
+            res = Turret(self.__game, values['tile'], values['x'], values['y'], self.map.tile[tile_index+1], False)
         # Tile 3 is reserved for the turret shot
         elif tile_index == 4:
-            tp_manager.create_teleporter(self.game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 5:
-            tp_manager.create_teleporter(self.game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 6:
-            tp_manager.create_teleporter(self.game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 8:
-            res = Ground(self.game, values['tile'], values['x'], values['y'])
+            res = Ground(self.__game, values['tile'], values['x'], values['y'])
         elif tile_index == 9:
-            res = Finish(self.game, values['tile'], values['x'], values['y'])
+            res = Finish(self.__game, values['tile'], values['x'], values['y'])
         elif tile_index == 16:
-            Player(self.game, values['tile'], values['x'], values['y'])
+            Player(self.__game, values['tile'], values['x'], values['y'])
             # Quick fix so the Player tile is replaced by a ground tile after he moves for the first time
             # TODO : Is this right ?
             values['tile'] = self.map.tile[8]
@@ -70,14 +76,23 @@ class Map(object):
         return res
 
     def draw_static_sprites(self):
-        self.game.static_sprites.draw(self.game.screen)
-        self.game.static_sprites.update(self.game.screen)
+        self.__game.static_sprites.draw(self.__game.screen)
+        self.__game.static_sprites.update(self.__game.screen)
+        # Update the whole screen
+        pygame.display.update()
 
     def update(self):
         """
-        Update all the sprites
+        Update sprites
         """
-        self.game.player_sprite.update()
+        # print(self.__game.player.rect.x, self.__game.player.rect.y)
+        # self.__game.player.update()
+        # if self.__game.player:
+        #     pygame.display.update(self.__game.player.rect)
+        #     self.__game.all_sprites.update()
+
+        self.__game.player_sprite.update()
+        self.__game.static_sprites.update()
         pygame.display.update()
 
     def draw(self):
@@ -86,7 +101,7 @@ class Map(object):
         """
         # FIXME : For now I draw the Ground sprite on each tick to override where the player image was
         #         (Only if the player moved)
-        if self.game.player.has_moved:
-            self.game.all_sprites.draw(self.game.screen)
-            self.game.player.has_moved = False
-        self.game.player_sprite.draw(self.game.screen)
+        if self.__game.player.has_moved:
+            self.__game.all_sprites.draw(self.__game.screen)
+            self.__game.player.has_moved = False
+        self.__game.player_sprite.draw(self.__game.screen)

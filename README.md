@@ -18,7 +18,7 @@ Things to implement for the game :
  Map class :
  
     - A special tile to go from a map to another (Loads the map)
-    - Replace the tile where the player spawned by a ground tile -> Check this with layer maybe
+    - Replace the tile where the player spawned by a ground tile -> Check this with layer maybe (This is quickfixed)
 
  Map Parser class :
     - The display is wrong -> The screen is flipped in a weird way
