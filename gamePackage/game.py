@@ -131,6 +131,7 @@ class Game(object):
         Reload a new game on the same map
         Delete the old instance of the game and start a new one
         """
+        # FIXME : this could be optimized
         del self
         Game(from_death=True)
 
