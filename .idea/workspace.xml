@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="308e70ce-e79f-49c1-864b-95dea2cb591c" name="Default Changelist" comment="Push venv">
-      <change beforePath="$PROJECT_DIR$/.idea/BlindFolded.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BlindFolded.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/map/map.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/map/map.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/sprite/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/sprite/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/sprite/teleporter.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/sprite/teleporter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/map_1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/map/map_1.tmx" afterDir="false" />
     </list>
     <ignored mask=".idea" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gamePackage/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="31" column="24" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="24" />
+            <state relative-caret-position="2631">
+              <caret line="144" column="24" selection-start-line="144" selection-start-column="19" selection-end-line="144" selection-end-column="24" />
               <folding>
                 <element signature="e#16#26#0" expanded="true" />
               </folding>
@@ -36,16 +34,16 @@
         <entry file="file://$PROJECT_DIR$/gamePackage/sprite/ground.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gamePackage/sprite/player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3">
-              <caret line="64" column="25" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+            <state relative-caret-position="420">
+              <caret line="84" column="43" lean-forward="true" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
               <folding>
                 <element signature="e#16#29#0" expanded="true" />
               </folding>
@@ -53,11 +51,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../.PyCharm2019.1/system/python_stubs/-1583732799/pygame/time.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gamePackage/__main__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gamePackage/map/map.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="90" column="30" lean-forward="true" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
+            <state relative-caret-position="504">
+              <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
               <folding>
                 <element signature="e#16#29#0" expanded="true" />
               </folding>
@@ -68,8 +84,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gamePackage/sprite/turret.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="31" column="47" lean-forward="true" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+            <state relative-caret-position="840">
+              <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gamePackage/sprite/teleporter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -85,9 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>lib</find>
-      <find>split_tile</find>
-      <find>ground_sprite</find>
       <find>hole_sprites</find>
       <find>wall_sprites</find>
       <find>17</find>
@@ -99,7 +121,6 @@
       <find>all_sprites</find>
       <find>YO</find>
       <find>Game</find>
-      <find>print</find>
       <find>clock</find>
       <find>disable</find>
       <find>map</find>
@@ -115,6 +136,10 @@
       <find>draw</find>
       <find>draw_static_sprites</find>
       <find>self.game</find>
+      <find>§</find>
+      <find>print</find>
+      <find>move_timing</find>
+      <find>evemt</find>
     </findStrings>
     <replaceStrings>
       <replace>game</replace>
@@ -137,7 +162,6 @@
         <option value="$PROJECT_DIR$/gamePackage/socket/my_socket.py" />
         <option value="$PROJECT_DIR$/gamePackage/socket/client.py" />
         <option value="$PROJECT_DIR$/gamePackage/socket/server.py" />
-        <option value="$PROJECT_DIR$/gamePackage/map/map_parser.py" />
         <option value="$PROJECT_DIR$/gamePackage/sprite/tile_mapping.py" />
         <option value="$PROJECT_DIR$/gamePackage/sprite/__init__.py" />
         <option value="$PROJECT_DIR$/gamePackage/game/game.py" />
@@ -151,12 +175,13 @@
         <option value="$PROJECT_DIR$/gamePackage/sprite/turret.py" />
         <option value="$PROJECT_DIR$/gamePackage/sprite/ground.py" />
         <option value="$PROJECT_DIR$/gamePackage/sprite/finish.py" />
-        <option value="$PROJECT_DIR$/gamePackage/sprite/player.py" />
         <option value="$PROJECT_DIR$/gamePackage/menu/main_menu.py" />
-        <option value="$PROJECT_DIR$/gamePackage/sprite/teleporter.py" />
-        <option value="$PROJECT_DIR$/gamePackage/game.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/gamePackage/sprite/teleporter.py" />
+        <option value="$PROJECT_DIR$/gamePackage/map/map_parser.py" />
+        <option value="$PROJECT_DIR$/gamePackage/game.py" />
         <option value="$PROJECT_DIR$/gamePackage/map/map.py" />
+        <option value="$PROJECT_DIR$/gamePackage/sprite/player.py" />
       </list>
     </option>
   </component>
@@ -182,6 +207,12 @@
               <item name="BlindFolded" type="b2602c69:ProjectViewProjectNode" />
               <item name="BlindFolded" type="462c0819:PsiDirectoryNode" />
               <item name="gamePackage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BlindFolded" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BlindFolded" type="462c0819:PsiDirectoryNode" />
+              <item name="gamePackage" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BlindFolded" type="b2602c69:ProjectViewProjectNode" />
@@ -300,7 +331,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1559664735632</updated>
-      <workItem from="1560162467849" duration="16152000" />
+      <workItem from="1560162467849" duration="16243000" />
+      <workItem from="1560193937534" duration="3018000" />
+      <workItem from="1560271361563" duration="3577000" />
     </task>
     <task id="LOCAL-00001" summary="Copy an other dir">
       <created>1559664798722</created>
@@ -379,11 +412,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560178358928</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="wip">
+      <created>1560185826395</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1560185826395</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16152000" />
+    <option name="totallyTimeSpent" value="22838000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -398,14 +438,11 @@
     <frame x="65" y="30" width="1855" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14925373" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15257049" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" show_stripe_button="false" weight="0.32896176" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32896176" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.498618" visible="true" weight="0.26666668" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.498618" visible="true" weight="0.21092896" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -414,13 +451,16 @@
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32896176" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.501382" side_tool="true" weight="0.34754097" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.5398907" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="SciView" weight="0.32946378" />
-      <window_info anchor="right" id="Coverage" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" show_stripe_button="false" weight="0.32896176" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Structure" order="3" visible="true" weight="0.1901603" />
+      <window_info anchor="right" id="SciView" order="4" weight="0.32946378" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Coverage" order="6" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,13 +525,13 @@
     <MESSAGE value="little optimisation, added game_over screen +  turret and finish tile" />
     <MESSAGE value="Turret + turret shot" />
     <MESSAGE value="Working before refactor for MVC" />
-    <MESSAGE value="wip" />
     <MESSAGE value="Implemented telporter" />
     <MESSAGE value="Implemented telporter + updated code to be more MVC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented telporter + updated code to be more MVC" />
+    <MESSAGE value="wip" />
+    <option name="LAST_COMMIT_MESSAGE" value="wip" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/BlindFolded$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1560185811744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gamePackage" />
+    <SUITE FILE_PATH="coverage/BlindFolded$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1560274938122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gamePackage" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/gamePackage/map/default_tileset.tsx" />
@@ -540,16 +580,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gamePackage/sprite/tile_mapping.py" />
-    <entry file="file://$PROJECT_DIR$/gamePackage/map/map_parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding>
-            <element signature="e#16#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gamePackage/menu/ingame_menu.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -623,13 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gamePackage/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/pygame/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32130">
@@ -675,13 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gamePackage/sprite/teleporter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../.PyCharm2019.1/system/python_stubs/-1583732799/pygame/display.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -689,44 +705,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gamePackage/map/map_parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="53" column="40" lean-forward="true" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+          <folding>
+            <element signature="e#16#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gamePackage/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gamePackage/sprite/turret.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="31" column="47" lean-forward="true" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+        <state relative-caret-position="840">
+          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gamePackage/sprite/player.py">
+    <entry file="file://$PROJECT_DIR$/gamePackage/sprite/teleporter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3">
-          <caret line="64" column="25" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
-          <folding>
-            <element signature="e#16#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gamePackage/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="31" column="24" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="24" />
-          <folding>
-            <element signature="e#16#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="231">
+          <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gamePackage/sprite/ground.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gamePackage/map/map.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="90" column="30" lean-forward="true" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
+        <state relative-caret-position="504">
+          <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+          <folding>
+            <element signature="e#16#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../.PyCharm2019.1/system/python_stubs/-1583732799/pygame/time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gamePackage/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2631">
+          <caret line="144" column="24" selection-start-line="144" selection-start-column="19" selection-end-line="144" selection-end-column="24" />
+          <folding>
+            <element signature="e#16#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gamePackage/sprite/player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="84" column="43" lean-forward="true" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
           <folding>
             <element signature="e#16#29#0" expanded="true" />
           </folding>
