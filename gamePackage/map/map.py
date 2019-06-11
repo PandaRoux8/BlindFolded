@@ -7,7 +7,7 @@ from gamePackage.sprite.wall import Wall
 from gamePackage.sprite.hole import Hole
 from gamePackage.sprite.turret import Turret
 from gamePackage.sprite.finish import Finish
-from gamePackage.sprite.teleporter import TeleporterManager, Teleporter
+from gamePackage.sprite.teleporter import TeleporterManager
 
 
 class Map(object):
@@ -85,14 +85,18 @@ class Map(object):
         """
         Update sprites
         """
-        # print(self.__game.player.rect.x, self.__game.player.rect.y)
-        # self.__game.player.update()
+        self.__game.player.update()
         # if self.__game.player:
-        #     pygame.display.update(self.__game.player.rect)
-        #     self.__game.all_sprites.update()
+        #     # pygame.display.update(self.__game.player.rect)
+        #     x = self.__game.player.rect.x
+        #     y = self.__game.player.rect.y
+        #     rect_to_update = pygame.Rect(x-32, y-32, 96, 96)
+        #
+        #     pygame.display.update(rect_to_update)
+            # self.__game.all_sprites.update()
 
-        self.__game.player_sprite.update()
-        self.__game.static_sprites.update()
+        # self.__game.player_sprite.update()
+        # self.__game.static_sprites.update()
         pygame.display.update()
 
     def draw(self):

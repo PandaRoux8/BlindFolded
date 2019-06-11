@@ -3,6 +3,8 @@ import pygame
 from pygame.locals import *
 from gamePackage.menu.ingame_menu import InGameMenu
 
+allow_move = pygame.USEREVENT + 1
+
 
 class Player(pygame.sprite.Sprite):
 
@@ -24,6 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.vx, self.vy = 0, 0
 
         self.has_moved = True
+        self.allow_move = True
 
         game.player = self
         game.player_sprite.add(self)
@@ -46,26 +49,29 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         # Up
-        if keys[pygame.K_w]:
+        if keys[pygame.K_w] and self.allow_move:
             self.vy = -self.speed
             # self.direction = 'up'
             self.has_moved = True
         # Down
-        if keys[pygame.K_s]:
+        if keys[pygame.K_s] and self.allow_move:
             self.vy = self.speed
             # self.direction = 'down'
             self.has_moved = True
         # Left
-        if keys[pygame.K_a]:
+        if keys[pygame.K_a] and self.allow_move:
             self.vx = -self.speed
             # self.direction = 'left'
             self.has_moved = True
         # Right
-        if keys[pygame.K_d]:
+        if keys[pygame.K_d] and self.allow_move:
             self.vx = self.speed
             # self.direction = 'right'
             self.has_moved = True
 
+        if self.has_moved:
+            self.allow_move = False
+            pygame.time.set_timer(allow_move, 100)
         # if keys[pygame.K_f]:
         #     # Check surrounding
         #     self.check_surrounding()
@@ -75,10 +81,10 @@ class Player(pygame.sprite.Sprite):
             menu = InGameMenu.get_instance(self.__game.screen, (1600, 900))
             menu.display_menu()
 
-        # Set the speed at 3/4 than the usual when using 2 direction at the same time
-        if self.vx != 0 and self.vy != 0:
-            self.vx *= 0.75
-            self.vy *= 0.75
+        # # Set the speed at 3/4 than the usual when using 2 direction at the same time
+        # if self.vx != 0 and self.vy != 0:
+        #     self.vx *= 0.5
+        #     self.vy *= 0.5
 
     # def check_surrounding(self):
     #     for npc in self.__game.:
@@ -100,6 +106,7 @@ class Player(pygame.sprite.Sprite):
 
     def check_exit_game(self):
         for event in pygame.event.get():
+            if event.type == allow_move:
+                self.allow_move = True
             if event.type == QUIT:
                 self.__game.exit_game()
-

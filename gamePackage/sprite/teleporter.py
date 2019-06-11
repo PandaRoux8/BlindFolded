@@ -10,7 +10,6 @@ class TeleporterManager(object):
 
     def create_teleporter(self, game, tile, x, y, tile_index):
         res = Teleporter(game, tile, x, y)
-        print(tile_index)
         if tile_index == 4:
             if not self.blue_teleporter:
                 self.blue_teleporter.append(res)
