@@ -8,7 +8,8 @@ from gamePackage.menu.options import OptionsMenu
 
 class MainMenu(pygameMenu.menu.Menu):
 
-    def __init__(self, screen, resolution):
+    def __init__(self, screen, resolution, core):
+        self.core = core
         # Init the screen size
         self.screen = screen
         self._width = resolution[0]
@@ -19,9 +20,9 @@ class MainMenu(pygameMenu.menu.Menu):
         self.display_menu()
 
     def display_menu(self):
-        self.add_option("New game", lambda: self.start_game())
+        # self.add_option("New game", lambda: self.core.start_game())
+        self.add_option("Lobby", lambda: self.leave("self.core.call_lobby()"))
         # TODO : Select a save file
-        self.add_option("Load game", lambda: self.start_game())
         self.add_option("Leave game", PYGAME_MENU_EXIT)
         self.enable()
         events = pygame.event.get()
@@ -29,6 +30,3 @@ class MainMenu(pygameMenu.menu.Menu):
 
     def start_game(self):
         self.disable()
-
-
-

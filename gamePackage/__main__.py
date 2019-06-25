@@ -1,5 +1,5 @@
 # coding: utf-8
-from gamePackage.game import Game
+from gamePackage.core import Core
 
 if __name__ == "__main__":
-    game = Game()
+    Core()

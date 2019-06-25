@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 from gamePackage.menu.ingame_menu import InGameMenu
 
-allow_move = pygame.USEREVENT + 1
+ALLOW_MOVE = pygame.USEREVENT + 1
 
 
 class Player(pygame.sprite.Sprite):
@@ -71,7 +71,7 @@ class Player(pygame.sprite.Sprite):
 
         if self.has_moved:
             self.allow_move = False
-            pygame.time.set_timer(allow_move, 100)
+            pygame.time.set_timer(ALLOW_MOVE, 100)
         # if keys[pygame.K_f]:
         #     # Check surrounding
         #     self.check_surrounding()
@@ -106,7 +106,7 @@ class Player(pygame.sprite.Sprite):
 
     def check_exit_game(self):
         for event in pygame.event.get():
-            if event.type == allow_move:
+            if event.type == ALLOW_MOVE:
                 self.allow_move = True
             if event.type == QUIT:
                 self.__game.exit_game()

@@ -7,22 +7,8 @@ from gamePackage.menu.main_menu import MainMenu
 
 class Game(object):
 
-    def __init__(self, from_death=False):
-        # Initialize pygame
-        pygame.init()
-        # Set title of the window
-        pygame.display.set_caption('Blindfolded')
-        # TODO : get this from a file
-        # Screen size
-        self.width = 832
-        self.height = 832
-        # Init the screen size
-        self.screen = pygame.display.set_mode((self.width, self.height))
-        # Frame rate (clock tick in the while true of the game)
-        self.framerate = 15
-        self.clock = pygame.time.Clock()
-        # Save the main menu instance
-        self.main_menu = None
+    def __init__(self, map=False,from_death=False):
+
         # Map loaded in the game
         self.map = None
         # Character of the player
@@ -44,21 +30,16 @@ class Game(object):
         # self.new_game()
         if not from_death:
             self.call_main_menu()
+        if map:
+            self.load_map(map)
         self.__run_game()
 
-    def call_main_menu(self):
-        if not self.main_menu:
-            self.main_menu = MainMenu(self.screen, (self.width, self.height))
-        else:
-            self.main_menu.enable()
-
-    def new_game(self):
+    def load_map(self, map):
         # Load the map
         self.map = Map(self, "../map/map_1.tmx")
         self.map.draw_static_sprites()
 
     def __run_game(self):
-        self.new_game()
         while True:
             self.clock.tick(self.framerate)
             self.player.check_exit_game()
