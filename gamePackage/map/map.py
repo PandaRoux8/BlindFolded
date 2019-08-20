@@ -19,13 +19,13 @@ class Map(object):
     def render_map(self):
         tp_manager = TeleporterManager()
         for x, row in enumerate(self.map.map):
-            for y, col in enumerate(row):
+            for y, value in enumerate(row):
                 values = {
-                    'tile': self.map.tile[col - 1],
+                    'tile': self.map.tile[value - 1],  # value -1 because XML values start at 1 and the list of tiles start at 0
                     'x': x * 32,
                     'y': y * 32,
                 }
-                self.render_tiles(col-1, values, tp_manager)
+                self.render_tiles(value-1, values, tp_manager)
         self.map_verification(tp_manager)
 
     def map_verification(self, tp_manager):
