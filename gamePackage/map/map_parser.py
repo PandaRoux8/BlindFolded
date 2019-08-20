@@ -56,7 +56,7 @@ class MapParser(object):
         rows = []
         for i, value in enumerate(data_clean.split(',')):
             rows.append(int(value))
-            # Every x we make a new col
+            # Every time you reach the width of the map, make a new col
             if (i+1) % self._width == 0:
                 map.append(rows)
                 rows = []
