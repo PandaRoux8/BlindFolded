@@ -11,9 +11,13 @@ from gamePackage.sprite.teleporter import TeleporterManager
 
 
 class Map(object):
-    def __init__(self, game, map_file):
+    def __init__(self, game, screen, map_file):
         self.map = MapParser(map_file)
         self.__game = game
+        self.screen = screen
+        # Select a font for the game
+        pygame.font.init()
+        self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
         self.render_map()
 
     def render_map(self):
@@ -76,8 +80,8 @@ class Map(object):
         return res
 
     def draw_static_sprites(self):
-        self.__game.static_sprites.draw(self.__game.screen)
-        self.__game.static_sprites.update(self.__game.screen)
+        self.__game.static_sprites.draw(self.screen)
+        self.__game.static_sprites.update(self.screen)
         # Update the whole screen
         pygame.display.update()
 
@@ -106,6 +110,23 @@ class Map(object):
         # FIXME : For now I draw the Ground sprite on each tick to override where the player image was
         #         (Only if the player moved)
         if self.__game.player.has_moved:
-            self.__game.all_sprites.draw(self.__game.screen)
+            self.__game.all_sprites.draw(self.screen)
             self.__game.player.has_moved = False
-        self.__game.player_sprite.draw(self.__game.screen)
+        self.__game.player_sprite.draw(self.screen)
+
+    def display_game_over(self):
+        # TODO : It's ugly but it works !
+        text = self.font.render("GAME OVER", 1, (255, 255, 255))
+        font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
+        text2 = font2.render("Press Space to continue", 1, (255, 255, 255))
+        # TODO : More MVC ? It should be done in view (map)
+        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
+        self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
+
+    def display_end_level_message(self):
+        text = self.font.render("GOOD JOB ", 1, (255, 255, 255))
+        font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
+        text2 = font2.render("Press Space to go to next level", 1, (255, 255, 255))
+        # TODO : More MVC ? It should be done in view (map)
+        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
+        self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))

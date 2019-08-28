@@ -1,5 +1,6 @@
 # coding: utf-8
 import pygame
+from gamePackage.game import Game
 # import pygameMenu
 # from pygameMenu.locals import *
 
@@ -11,9 +12,12 @@ class LobbyMenu(object):
         self.screen = screen
         self._width = resolution[0]
         self._height = resolution[1]
-        super(LobbyMenu, self).__init__(self.screen, self._width, self._height, self.font,
-                                       'Blindfolded', bgfun=lambda: self.screen.fill((0, 255, 100)))
-        self.display_menu()
+        self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
+        super(LobbyMenu, self).__init__()
+        # Straight up start the game for testing purpose
+        Game(self.screen, map='truc')
+        # TODO : Show the lobby menu ... And start the game afterward
+        # self.display_menu()
 
     def display_menu(self):
         text = self.font.render("GOOD JOB ", 1, (255, 255, 255))

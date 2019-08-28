@@ -2,17 +2,20 @@
 import sys
 import pygame
 from gamePackage.map.map import Map
-from gamePackage.menu.main_menu import MainMenu
 
 
 class Game(object):
 
-    def __init__(self, map=False,from_death=False):
-
+    def __init__(self, screen, map=False, from_death=False):
         # Map loaded in the game
         self.map = None
         # Character of the player
         self.player = None
+
+        # TODO : Get these from __main__ ? Or from a file ?
+        # Game clock
+        self.clock = pygame.time.Clock()
+        self.framerate = 15
 
         # Set the sprite groups
         self.all_sprites = pygame.sprite.Group()
@@ -23,20 +26,17 @@ class Game(object):
         self.teleporter_sprites = pygame.sprite.Group()
         self.player_sprite = pygame.sprite.Group()
 
-        # Select a font for the game
-        pygame.font.init()
-        self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
         # # When creating an instance start a new game
         # self.new_game()
-        if not from_death:
-            self.call_main_menu()
+        # if not from_death:
+        #     self.call_main_menu()
         if map:
-            self.load_map(map)
+            self.load_map(screen, map)
         self.__run_game()
 
-    def load_map(self, map):
+    def load_map(self, screen, map):
         # Load the map
-        self.map = Map(self, "../map/map_1.tmx")
+        self.map = Map(self, screen, "../map/map_1.tmx")
         self.map.draw_static_sprites()
 
     def __run_game(self):
@@ -93,13 +93,9 @@ class Game(object):
         Restart a new game
         :return:
         """
-        # It's ugly but it works !
-        text = self.font.render("GAME OVER", 1, (255, 255, 255))
-        font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
-        text2 = font2.render("Press Space to continue", 1, (255, 255, 255))
-        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
-        self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
+        self.map.display_game_over()
 
+        # TODO : More MVC ? Place it on the controller
         while not pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.event.pump()
             pygame.display.flip()
@@ -112,15 +108,14 @@ class Game(object):
         Reload a new game on the same map
         Delete the old instance of the game and start a new one
         """
+        screen = self.map.screen
+        # TODO : How do we do this ? We need to pass screen here
         del self
-        Game(from_death=True)
+        # TODO : Load the next map
+        Game(screen, map='truc', from_death=True)
 
     def load_next_map(self):
-        text = self.font.render("GOOD JOB ", 1, (255, 255, 255))
-        font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
-        text2 = font2.render("Press Space to go to next level", 1, (255, 255, 255))
-        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
-        self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
+        self.map.display_end_level_message()
 
         while not pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.event.pump()
