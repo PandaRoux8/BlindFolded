@@ -1,12 +1,10 @@
 import pygame
 from gamePackage.game import Game
-# import pygameMenu
+import pygameMenu
 # from pygameMenu.locals import *
-from gamePackage.network.server import Server
-import threading
 
 
-class LobbyMenu(object):
+class JoinMenu(object):
 
     # TODO ::
     def __init__(self, screen, resolution):
@@ -15,18 +13,11 @@ class LobbyMenu(object):
         self._width = resolution[0]
         self._height = resolution[1]
         self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
-        super(LobbyMenu, self).__init__()
-        LobbyMenu.start_server()
+        super(JoinMenu, self).__init__()
         # Straight up start the game for testing purpose
-        Game(self.screen, map='truc', guide=True)
+        Game(self.screen, map='truc')
         # TODO : Show the lobby menu ... And start the game afterward
         # self.display_menu()
-
-    @staticmethod
-    def start_server():
-        # Daemon -> We don't have to worry about stopping the thread it stops when program exits
-        thread = threading.Thread(target=Server.start_server(), daemon=True)
-        thread.start()
 
     def display_menu(self):
         text = self.font.render("GOOD JOB ", 1, (255, 255, 255))

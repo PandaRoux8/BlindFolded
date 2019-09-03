@@ -1,4 +1,3 @@
-# coding: utf-8
 import pygame
 from gamePackage.map.map_parser import MapParser
 from gamePackage.sprite.ground import Ground

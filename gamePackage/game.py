@@ -1,4 +1,3 @@
-# coding: utf-8
 import sys
 import pygame
 from gamePackage.map.map import Map
@@ -6,11 +5,12 @@ from gamePackage.map.map import Map
 
 class Game(object):
 
-    def __init__(self, screen, map=False, from_death=False):
+    def __init__(self, screen, map=False, from_death=False, guide=False):
         # Map loaded in the game
         self.map = None
         # Character of the player
         self.player = None
+        self.guide = guide
 
         # TODO : Get these from __main__ ? Or from a file ?
         # Game clock

@@ -1,7 +1,7 @@
-# coding: utf-8
 import pygame
 from pygame.locals import *
 from gamePackage.menu.ingame_menu import InGameMenu
+from gamePackage.network.client import Client
 
 ALLOW_MOVE = pygame.USEREVENT + 1
 
@@ -47,31 +47,31 @@ class Player(pygame.sprite.Sprite):
     def move_player(self):
         self.vx, self.vy = 0, 0
         keys = pygame.key.get_pressed()
+        if self.__game.guide:
+            # Up
+            if keys[pygame.K_w] and self.allow_move:
+                self.vy = -self.speed
+                # self.direction = 'up'
+                self.has_moved = True
+            # Down
+            if keys[pygame.K_s] and self.allow_move:
+                self.vy = self.speed
+                # self.direction = 'down'
+                self.has_moved = True
+            # Left
+            if keys[pygame.K_a] and self.allow_move:
+                self.vx = -self.speed
+                # self.direction = 'left'
+                self.has_moved = True
+            # Right
+            if keys[pygame.K_d] and self.allow_move:
+                self.vx = self.speed
+                # self.direction = 'right'
+                self.has_moved = True
 
-        # Up
-        if keys[pygame.K_w] and self.allow_move:
-            self.vy = -self.speed
-            # self.direction = 'up'
-            self.has_moved = True
-        # Down
-        if keys[pygame.K_s] and self.allow_move:
-            self.vy = self.speed
-            # self.direction = 'down'
-            self.has_moved = True
-        # Left
-        if keys[pygame.K_a] and self.allow_move:
-            self.vx = -self.speed
-            # self.direction = 'left'
-            self.has_moved = True
-        # Right
-        if keys[pygame.K_d] and self.allow_move:
-            self.vx = self.speed
-            # self.direction = 'right'
-            self.has_moved = True
-
-        if self.has_moved:
-            self.allow_move = False
-            pygame.time.set_timer(ALLOW_MOVE, 100)
+            if self.has_moved:
+                self.allow_move = False
+                pygame.time.set_timer(ALLOW_MOVE, 100)
         # if keys[pygame.K_f]:
         #     # Check surrounding
         #     self.check_surrounding()
@@ -91,6 +91,10 @@ class Player(pygame.sprite.Sprite):
     #         if npc.rect.x == self.rect.x or npc.rect.y == self.rect.y:
     #             npc.talk()
 
+    def update_position(self, pos_x, pos_y):
+        self.rect.x = pos_x
+        self.rect.y = pos_y
+
     def update(self):
         """
         Update the character position
@@ -103,6 +107,8 @@ class Player(pygame.sprite.Sprite):
         self.__game.kill_on_collide()
         self.__game.teleport_player()
         self.__game.finish_map()
+        if not self.__game.guide:
+            Client.send_player_data(self.rect.x, self.rect.y)
 
     def check_exit_game(self):
         for event in pygame.event.get():

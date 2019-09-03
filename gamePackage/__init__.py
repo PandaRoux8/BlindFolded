@@ -2,4 +2,4 @@
 from . import menu
 from . import game
 from . import map
-from . import socket
+from . import network

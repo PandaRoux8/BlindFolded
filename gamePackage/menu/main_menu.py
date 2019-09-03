@@ -1,9 +1,9 @@
-# coding: utf-8
 import pygame
 import pygameMenu
 from pygameMenu.locals import *
 from gamePackage.menu.lobby import LobbyMenu
 from gamePackage.menu.options import OptionsMenu
+from gamePackage.menu.join_menu import JoinMenu
 
 
 class MainMenu(pygameMenu.menu.Menu):
@@ -21,6 +21,7 @@ class MainMenu(pygameMenu.menu.Menu):
     def display_menu(self):
         # self.add_option("New game", lambda: self.start_game())
         self.add_option("Lobby", lambda: self._call_lobby())
+        self.add_option("Join Game", lambda: self._call_join_menu())
         # TODO : Select a save file
         self.add_option("Leave game", PYGAME_MENU_EXIT)
         self.enable()
@@ -30,6 +31,10 @@ class MainMenu(pygameMenu.menu.Menu):
     def _call_lobby(self):
         self.disable()
         LobbyMenu(self.screen, (self._width, self._height))
+
+    def _call_join_menu(self):
+        self.disable()
+        JoinMenu(self.screen, (self._width, self._height))
 
     def _call_options(self):
         self.disable()
