@@ -23,9 +23,10 @@ class Server(object):
                         break
                     Server.update_player_data(data)
 
-    @staticmethod
-    def update_player_data(data):
-        x, y = data.decode().split(';')
+    def update_player_data(self, data):
+        if self.player:
+            x, y = data.decode().split(';')
+            self.player.update_position(x, y)
         # TODO : Update the player object with these data
 
     @staticmethod

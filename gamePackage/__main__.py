@@ -1,7 +1,5 @@
-# coding: utf-8
-from gamePackage.core import Core
-from gamePackage.menu import main_menu
 import pygame
+from gamePackage.menu import main_menu
 
 if __name__ == "__main__":
     # Initialize pygame

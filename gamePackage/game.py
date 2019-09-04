@@ -5,12 +5,13 @@ from gamePackage.map.map import Map
 
 class Game(object):
 
-    def __init__(self, screen, map=False, from_death=False, guide=False):
+    def __init__(self, screen, map=False, from_death=False, guide=False, server=False):
         # Map loaded in the game
         self.map = None
         # Character of the player
         self.player = None
         self.guide = guide
+        self.server = server
 
         # TODO : Get these from __main__ ? Or from a file ?
         # Game clock
@@ -40,6 +41,8 @@ class Game(object):
         self.map.draw_static_sprites()
 
     def __run_game(self):
+        if self.server:
+            self.server.player = self.player
         while True:
             self.clock.tick(self.framerate)
             self.player.check_exit_game()

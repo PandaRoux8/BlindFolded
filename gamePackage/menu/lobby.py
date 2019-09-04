@@ -16,9 +16,9 @@ class LobbyMenu(object):
         self._height = resolution[1]
         self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
         super(LobbyMenu, self).__init__()
-        LobbyMenu.start_server()
+        server = LobbyMenu.start_server()
         # Straight up start the game for testing purpose
-        Game(self.screen, map='truc', guide=True)
+        Game(self.screen, map='truc', guide=True, server=server)
         # TODO : Show the lobby menu ... And start the game afterward
         # self.display_menu()
 
