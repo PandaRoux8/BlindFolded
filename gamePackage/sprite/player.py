@@ -11,6 +11,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, game, tile, x, y):
         super(Player, self).__init__()
         self.__game = game
+        self.client = None
 
         # Color of the Player
         self.image = tile
@@ -108,7 +109,11 @@ class Player(pygame.sprite.Sprite):
         self.__game.teleport_player()
         self.__game.finish_map()
         if not self.__game.guide:
-            Client.send_player_data(self.rect.x, self.rect.y)
+            print("Yo")
+            if not self.client:
+                self.client = Client()
+            if self.has_moved:
+                self.client.send_player_data(self.rect.x, self.rect.y)
 
     def check_exit_game(self):
         for event in pygame.event.get():

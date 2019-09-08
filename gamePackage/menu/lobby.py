@@ -24,9 +24,11 @@ class LobbyMenu(object):
 
     @staticmethod
     def start_server():
+        server = Server()
         # Daemon -> We don't have to worry about stopping the thread it stops when program exits
-        thread = threading.Thread(target=Server.start_server(), daemon=True)
+        thread = threading.Thread(target=server.start_server(), daemon=True)
         thread.start()
+        return server
 
     def display_menu(self):
         text = self.font.render("GOOD JOB ", 1, (255, 255, 255))

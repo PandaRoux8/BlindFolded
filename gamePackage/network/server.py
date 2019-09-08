@@ -9,8 +9,7 @@ class Server(object):
     def __init__(self):
         self.player = None
 
-    @staticmethod
-    def start_server():
+    def start_server(self):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((HOST, PORT))
             s.listen(37666)
@@ -21,9 +20,11 @@ class Server(object):
                     data = conn.recv(256)
                     if not data:
                         break
-                    Server.update_player_data(data)
+                    else:
+                        self.update_player_data(data)
 
     def update_player_data(self, data):
+        print("sah", self.player, data)
         if self.player:
             x, y = data.decode().split(';')
             self.player.update_position(x, y)
