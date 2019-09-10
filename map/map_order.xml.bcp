@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <map current="True" timer="60">map1.tmx</map>
+    <map current="False" timer="60">map2.tmx</map>
+    <map current="False" timer="60">map3.tmx</map>
+</root>

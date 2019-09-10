@@ -18,7 +18,7 @@ class LobbyMenu(object):
         server = LobbyMenu.start_server()
         # TODO : Load menu instead
         #  Straight up start the game for testing purpose
-        Game(self.screen, map='truc', server=server)
+        Game(self.screen, server=server)
         # TODO : Show the lobby menu ... And start the game afterward
         # self.display_menu()
 

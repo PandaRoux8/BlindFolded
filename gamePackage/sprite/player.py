@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 from gamePackage.menu.ingame_menu import InGameMenu
-from gamePackage.network.client import Client
 
 ALLOW_MOVE = pygame.USEREVENT + 1
 

@@ -118,7 +118,6 @@ class Map(object):
         text = self.font.render("GAME OVER", 1, (255, 255, 255))
         font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
         text2 = font2.render("Press Space to continue", 1, (255, 255, 255))
-        # TODO : More MVC ? It should be done in view (map)
         self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
         self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
 
@@ -126,6 +125,5 @@ class Map(object):
         text = self.font.render("GOOD JOB ", 1, (255, 255, 255))
         font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
         text2 = font2.render("Press Space to go to next level", 1, (255, 255, 255))
-        # TODO : More MVC ? It should be done in view (map)
         self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
         self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))

@@ -8,7 +8,7 @@ if __name__ == "__main__":
     pygame.display.set_caption('Blindfolded')
     # TODO : get this from a file
     # Screen size
-    # TODO : We'll need to read a save file to know the use conf
+    # TODO : We'll need to read a save file to know the user conf
     width = 832
     height = 832
     # Init the screen size

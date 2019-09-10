@@ -17,7 +17,7 @@ class JoinMenu(object):
         super(JoinMenu, self).__init__()
         client = Client()
         # Straight up start the game for testing purpose
-        Game(self.screen, map='truc', client=client)
+        Game(self.screen, client=client)
         # TODO : Show the lobby menu ... And start the game afterward
         # self.display_menu()
 
