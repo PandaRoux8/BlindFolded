@@ -17,6 +17,7 @@ class LobbyMenu(object):
         self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
         super(LobbyMenu, self).__init__()
         server = LobbyMenu.start_server()
+        print("Yo", server)
         # Straight up start the game for testing purpose
         Game(self.screen, map='truc', guide=True, server=server)
         # TODO : Show the lobby menu ... And start the game afterward
@@ -25,9 +26,8 @@ class LobbyMenu(object):
     @staticmethod
     def start_server():
         server = Server()
-        # Daemon -> We don't have to worry about stopping the thread it stops when program exits
-        thread = threading.Thread(target=server.start_server(), daemon=True)
-        thread.start()
+        server.check_connection()
+        server.start_server()
         return server
 
     def display_menu(self):

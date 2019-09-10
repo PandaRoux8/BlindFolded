@@ -108,9 +108,9 @@ class Map(object):
         """
         # FIXME : For now I draw the Ground sprite on each tick to override where the player image was
         #         (Only if the player moved)
-        if self.__game.player.has_moved:
-            self.__game.all_sprites.draw(self.screen)
-            self.__game.player.has_moved = False
+        # if self.__game.player.has_moved:
+        self.__game.all_sprites.draw(self.screen)
+        self.__game.player.has_moved = False
         self.__game.player_sprite.draw(self.screen)
 
     def display_game_over(self):

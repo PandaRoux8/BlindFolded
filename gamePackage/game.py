@@ -41,9 +41,10 @@ class Game(object):
         self.map.draw_static_sprites()
 
     def __run_game(self):
-        if self.server:
-            self.server.player = self.player
         while True:
+            if self.server:
+                self.server.player = self.player
+                self.server.check_move()
             self.clock.tick(self.framerate)
             self.player.check_exit_game()
             # Tick for the framerate

@@ -48,7 +48,7 @@ class Player(pygame.sprite.Sprite):
     def move_player(self):
         self.vx, self.vy = 0, 0
         keys = pygame.key.get_pressed()
-        if self.__game.guide:
+        if not self.__game.guide:
             # Up
             if keys[pygame.K_w] and self.allow_move:
                 self.vy = -self.speed
@@ -93,8 +93,8 @@ class Player(pygame.sprite.Sprite):
     #             npc.talk()
 
     def update_position(self, pos_x, pos_y):
-        self.rect.x = pos_x
-        self.rect.y = pos_y
+        self.rect.x = int(pos_x)
+        self.rect.y = int(pos_y)
 
     def update(self):
         """
@@ -109,7 +109,6 @@ class Player(pygame.sprite.Sprite):
         self.__game.teleport_player()
         self.__game.finish_map()
         if not self.__game.guide:
-            print("Yo")
             if not self.client:
                 self.client = Client()
             if self.has_moved:
