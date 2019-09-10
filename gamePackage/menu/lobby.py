@@ -3,7 +3,6 @@ from gamePackage.game import Game
 # import pygameMenu
 # from pygameMenu.locals import *
 from gamePackage.network.server import Server
-import threading
 
 
 class LobbyMenu(object):
@@ -17,16 +16,16 @@ class LobbyMenu(object):
         self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
         super(LobbyMenu, self).__init__()
         server = LobbyMenu.start_server()
-        print("Yo", server)
-        # Straight up start the game for testing purpose
-        Game(self.screen, map='truc', guide=True, server=server)
+        # TODO : Load menu instead
+        #  Straight up start the game for testing purpose
+        Game(self.screen, map='truc', server=server)
         # TODO : Show the lobby menu ... And start the game afterward
         # self.display_menu()
 
     @staticmethod
     def start_server():
         server = Server()
-        server.check_connection()
+        # This method ends when a connection is made
         server.start_server()
         return server
 

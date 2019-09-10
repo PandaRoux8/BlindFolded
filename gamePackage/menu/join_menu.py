@@ -2,6 +2,7 @@ import pygame
 from gamePackage.game import Game
 import pygameMenu
 # from pygameMenu.locals import *
+from gamePackage.network.client import Client
 
 
 class JoinMenu(object):
@@ -14,8 +15,9 @@ class JoinMenu(object):
         self._height = resolution[1]
         self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
         super(JoinMenu, self).__init__()
+        client = Client()
         # Straight up start the game for testing purpose
-        Game(self.screen, map='truc')
+        Game(self.screen, map='truc', client=client)
         # TODO : Show the lobby menu ... And start the game afterward
         # self.display_menu()
 

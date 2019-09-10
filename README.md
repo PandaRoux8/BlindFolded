@@ -5,8 +5,6 @@ Things to implement for the game :
   - An option menu (resolution, keys, fps, fullscreen/windowed)
   - Find a way to scale the game for different resolution
   - An ESC menu -> To leave the game and go to the main menu
-  - Check import
-  - Connection socket
 
   - A save file for the configuration
   - A save file for the game
@@ -14,6 +12,9 @@ Things to implement for the game :
     ->  Wall = 0, Hole = 1, etc. 
     
   - Optimize the game check update/draw method in game
+  
+  Socket : 
+  - Manage disconnect error.. 
 
  Map class :
  
@@ -67,6 +68,6 @@ OTHERS :
 Make a script to put header on each python file.
 
 # Name      : Schluchter Jules
-# Mail      :
+# Mail      : jules.schluchter@gmail.com
 # Date      : <today>
 # Module    : BlindFolded Game  

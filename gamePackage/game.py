@@ -1,17 +1,18 @@
 import sys
 import pygame
+from gamePackage.network.client import Client
 from gamePackage.map.map import Map
 
 
 class Game(object):
 
-    def __init__(self, screen, map=False, from_death=False, guide=False, server=False):
+    def __init__(self, screen, map=False, from_death=False, server=False, client=False):
         # Map loaded in the game
         self.map = None
         # Character of the player
         self.player = None
-        self.guide = guide
         self.server = server
+        self.client = client
 
         # TODO : Get these from __main__ ? Or from a file ?
         # Game clock
@@ -27,10 +28,6 @@ class Game(object):
         self.teleporter_sprites = pygame.sprite.Group()
         self.player_sprite = pygame.sprite.Group()
 
-        # # When creating an instance start a new game
-        # self.new_game()
-        # if not from_death:
-        #     self.call_main_menu()
         if map:
             self.load_map(screen, map)
         self.__run_game()
@@ -44,7 +41,8 @@ class Game(object):
         while True:
             if self.server:
                 self.server.player = self.player
-                self.server.check_move()
+                self.server.game = self
+                self.server.listen()
             self.clock.tick(self.framerate)
             self.player.check_exit_game()
             # Tick for the framerate
@@ -112,11 +110,14 @@ class Game(object):
         Reload a new game on the same map
         Delete the old instance of the game and start a new one
         """
+        if self.client:
+            self.client.send_new_map()
         screen = self.map.screen
+        server = self.server
+        client = self.client
         # TODO : How do we do this ? We need to pass screen here
         del self
-        # TODO : Load the next map
-        Game(screen, map='truc', from_death=True)
+        Game(screen, map='truc', from_death=True, server=server, client=client)
 
     def load_next_map(self):
         self.map.display_end_level_message()

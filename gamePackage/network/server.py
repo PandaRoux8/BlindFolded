@@ -1,5 +1,4 @@
 import socket
-import threading
 
 HOST = '127.0.0.1'
 PORT = 37666
@@ -12,51 +11,51 @@ class Server(object):
         self.socket = None
         self.connection = None
         self.address = None
+        self.game = None
 
-    def check_move(self):
+    def listen(self):
+        """
+        Check for move from the player
+        """
         data = self.connection.recv(256)
-        print(data)
         if data:
-            self.update_player_data(data)
+            data = data.decode()
+            if ';' in data:
+                self.update_player_data(data)
+            elif 'map' in data:
+                self.game.reload_game()
 
     def start_server(self):
+        """
+        Start the server
+        """
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.bind((HOST, PORT))
         self.socket.listen(37666)
         self.connection, self.address = self.socket.accept()
 
-    # def run(self, conn, addr):
-    #     with conn:
-    #         print("Connected by " + str(addr))
-    #         while True:
-    #             data = conn.recv(256)
-    #             print(data)
-    #             if not data:
-    #                 break
-    #             else:
-    #                 self.update_player_data(data)
-
     def update_player_data(self, data):
+        """
+        Update the player position
+        :param data: x and y position as bytes and spearated by a ;
+        """
         print("sah", self.player, data)
         if self.player:
-            x, y = data.decode().split(';')
+            x, y = data.split(';')
             self.player.update_position(x, y)
-        # TODO : Update the player object with these data
 
     @staticmethod
     def check_connection():
+        """
+        Check for a client connection
+        :return: True if succes False otherwise
+        """
         return True
-        # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        #     s.bind((HOST, PORT))
-        #     s.listen(37666)
-        #     conn, addr = s.accept()
-        #     with conn:
-        #         print("Connected by " + str(addr))
 
     def __del__(self):
+        """
+        Destructor to close all connection when this object is destroyed
+        :return:
+        """
         self.connection.close()
         self.socket.close()
-
-
-# # TODO : remove this and start it when you get in the lobby
-# Server().start_server()

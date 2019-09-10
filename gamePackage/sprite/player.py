@@ -11,7 +11,6 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, game, tile, x, y):
         super(Player, self).__init__()
         self.__game = game
-        self.client = None
 
         # Color of the Player
         self.image = tile
@@ -48,7 +47,7 @@ class Player(pygame.sprite.Sprite):
     def move_player(self):
         self.vx, self.vy = 0, 0
         keys = pygame.key.get_pressed()
-        if not self.__game.guide:
+        if not self.__game.server:
             # Up
             if keys[pygame.K_w] and self.allow_move:
                 self.vy = -self.speed
@@ -73,24 +72,11 @@ class Player(pygame.sprite.Sprite):
             if self.has_moved:
                 self.allow_move = False
                 pygame.time.set_timer(ALLOW_MOVE, 100)
-        # if keys[pygame.K_f]:
-        #     # Check surrounding
-        #     self.check_surrounding()
 
         # Go to escape menu
         if keys[pygame.K_ESCAPE]:
             menu = InGameMenu.get_instance(self.__game.screen, (1600, 900))
             menu.display_menu()
-
-        # # Set the speed at 3/4 than the usual when using 2 direction at the same time
-        # if self.vx != 0 and self.vy != 0:
-        #     self.vx *= 0.5
-        #     self.vy *= 0.5
-
-    # def check_surrounding(self):
-    #     for npc in self.__game.:
-    #         if npc.rect.x == self.rect.x or npc.rect.y == self.rect.y:
-    #             npc.talk()
 
     def update_position(self, pos_x, pos_y):
         self.rect.x = int(pos_x)
@@ -108,11 +94,8 @@ class Player(pygame.sprite.Sprite):
         self.__game.kill_on_collide()
         self.__game.teleport_player()
         self.__game.finish_map()
-        if not self.__game.guide:
-            if not self.client:
-                self.client = Client()
-            if self.has_moved:
-                self.client.send_player_data(self.rect.x, self.rect.y)
+        if self.__game.client and self.has_moved:
+            self.__game.client.send_player_data(self.rect.x, self.rect.y)
 
     def check_exit_game(self):
         for event in pygame.event.get():
