@@ -5,10 +5,10 @@ from gamePackage.menu.ingame_menu import InGameMenu
 ALLOW_MOVE = pygame.USEREVENT + 1
 
 
-class Player(pygame.sprite.Sprite):
+class Blind(pygame.sprite.Sprite):
 
     def __init__(self, game, tile, x, y):
-        super(Player, self).__init__()
+        super(Blind, self).__init__()
         self.__game = game
 
         # Color of the Player

@@ -1,19 +1,16 @@
 import sys
 import pygame
 from gamePackage.map.map import Map
-from xml.etree import ElementTree as ET
-import xml.dom.minidom
 
 
 class Game(object):
 
-    def __init__(self, screen, server=False, client=False):
+    def __init__(self, screen):
+        print("YO GAME")
         # Map loaded in the game
         self.map = None
         # Character of the player
-        self.player = None
-        self.server = server
-        self.client = client
+        self.blind = None
 
         # TODO : Get these from __main__ ? Or from a file ?
         # Game clock
@@ -27,69 +24,26 @@ class Game(object):
         self.kill_sprites = pygame.sprite.Group()
         self.finish_sprite = pygame.sprite.Group()
         self.teleporter_sprites = pygame.sprite.Group()
-        self.player_sprite = pygame.sprite.Group()
+        self.blind_sprite = pygame.sprite.Group()
 
         self.load_map(screen)
-        self.__run_game()
+        self.run_game()
 
     def load_map(self, screen):
-        map_name = self.search_map()
-        map_path = "../map/%s" % map_name
-        # Load the map
-        self.map = Map(self, screen, map_path)
-        self.map.draw_static_sprites()
+        pass
 
-    def __run_game(self):
+    def run_game(self):
         while True:
             self.clock.tick(self.framerate)
-            self.player.check_exit_game()
+            self.blind.check_exit_game()
             # Tick for the framerate
             # TODO : FIXME : Find out how this really works so it can be optimized (drawing updating etc.)
             self.map.draw()
             self.map.update()
             if self.server:
-                self.server.player = self.player
+                self.server.blind = self.blind
                 self.server.game = self
                 self.server.listen()
-
-    def collide_with_walls(self, axis=None):
-        """
-        Check if the Character collide with any wall.
-        Block the character in front of the wall if it's the case.
-        Do it with x or y axis because if we do both at one time it does strange things. (ie the Player teleport)
-        """
-        block_hit_list = pygame.sprite.spritecollide(self.player, self.block_sprites, dokill=False)
-        for block in block_hit_list:
-            if axis == 'x':
-                if self.player.vx > 0:
-                    self.player.rect.right = block.rect.left
-                else:
-                    self.player.rect.left = block.rect.right
-
-            if axis == 'y':
-                if self.player.vy > 0:
-                    self.player.rect.bottom = block.rect.top
-                else:
-                    self.player.rect.top = block.rect.bottom
-
-    def kill_on_collide(self):
-        """
-        Check if the player has fallen into a hole
-        """
-        block_hit_list = pygame.sprite.spritecollide(self.player, self.kill_sprites, dokill=False)
-        if block_hit_list:
-            self.game_over()
-
-    def teleport_player(self):
-        block_hit_list = pygame.sprite.spritecollide(self.player, self.teleporter_sprites, dokill=False)
-        if len(block_hit_list) == 1 and self.player.has_moved:
-            self.player.rect.x = block_hit_list[0].destination_x
-            self.player.rect.y = block_hit_list[0].destination_y
-
-    def finish_map(self):
-        block_hit_list = pygame.sprite.spritecollide(self.player, self.finish_sprite, dokill=False)
-        if block_hit_list:
-            self.load_next_map()
 
     def game_over(self):
         """
@@ -117,7 +71,6 @@ class Game(object):
         screen = self.map.screen
         server = self.server
         client = self.client
-        # TODO : How do we do this ? We need to pass screen here
         del self
         Game(screen, server=server, client=client)
 
@@ -130,30 +83,6 @@ class Game(object):
             pygame.display.flip()
             self.clock.tick(30)
         self.reload_game()
-
-    def search_map(self, done=False):
-        map_order_file = "../map/map_order.xml"
-        root = ET.parse(map_order_file).getroot()
-        maps = root.findall('map')
-        if done:
-            getnext = False
-            for map in maps:
-                if getnext:
-                    map.set('current', 'True')
-                    break
-                if eval(map.get('current')):
-                    map.set('current', 'False')
-                    getnext = True
-
-            with open(map_order_file, 'w') as f:
-                ugly_xml = xml.dom.minidom.parseString(ET.tostring(root))
-                xml_pretty_str = ugly_xml.toprettyxml()
-                f.write(xml_pretty_str)
-
-        for map in maps:
-            if eval(map.get('current')):
-                return map.text
-        print("DONE")
 
     def exit_game(self):
         pygame.quit()

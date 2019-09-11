@@ -1,5 +1,5 @@
 import pygame
-from gamePackage.game import Game
+from gamePackage.game_blind import GameBlind
 import pygameMenu
 # from pygameMenu.locals import *
 from gamePackage.network.client import Client
@@ -17,7 +17,7 @@ class JoinMenu(object):
         super(JoinMenu, self).__init__()
         client = Client()
         # Straight up start the game for testing purpose
-        Game(self.screen, client=client)
+        GameBlind(self.screen, client)
         # TODO : Show the lobby menu ... And start the game afterward
         # self.display_menu()
 

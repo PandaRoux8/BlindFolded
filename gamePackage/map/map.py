@@ -1,7 +1,7 @@
 import pygame
 from gamePackage.map.map_parser import MapParser
 from gamePackage.sprite.ground import Ground
-from gamePackage.sprite.player import Player
+from gamePackage.sprite.blind import Blind
 from gamePackage.sprite.wall import Wall
 from gamePackage.sprite.hole import Hole
 from gamePackage.sprite.turret import Turret
@@ -71,7 +71,7 @@ class Map(object):
         elif tile_index == 9:
             res = Finish(self.__game, values['tile'], values['x'], values['y'])
         elif tile_index == 16:
-            Player(self.__game, values['tile'], values['x'], values['y'])
+            Blind(self.__game, values['tile'], values['x'], values['y'])
             # Quick fix so the Player tile is replaced by a ground tile after he moves for the first time
             # TODO : Is this right ?
             values['tile'] = self.map.tile[8]

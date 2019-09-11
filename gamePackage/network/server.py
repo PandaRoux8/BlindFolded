@@ -7,7 +7,7 @@ PORT = 37666
 class Server(object):
 
     def __init__(self):
-        self.player = None
+        self.blind = None
         self.socket = None
         self.connection = None
         self.address = None
@@ -15,13 +15,13 @@ class Server(object):
 
     def listen(self):
         """
-        Check for move from the player
+        Check for move from the blind
         """
         data = self.connection.recv(256)
         if data:
             data = data.decode()
             if ';' in data:
-                self.update_player_data(data)
+                self.update_blind_data(data)
             elif 'map' in data:
                 self.game.reload_game()
 
@@ -34,15 +34,15 @@ class Server(object):
         self.socket.listen(37666)
         self.connection, self.address = self.socket.accept()
 
-    def update_player_data(self, data):
+    def update_blind_data(self, data):
         """
-        Update the player position
+        Update the blind position
         :param data: x and y position as bytes and spearated by a ;
         """
-        print("sah", self.player, data)
-        if self.player:
+        print("sah", self.blind, data)
+        if self.blind:
             x, y = data.split(';')
-            self.player.update_position(x, y)
+            self.blind.update_position(x, y)
 
     @staticmethod
     def check_connection():

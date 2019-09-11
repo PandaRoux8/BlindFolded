@@ -1,13 +1,13 @@
 IMPORTANT : 
 
     - Get to next map -> Make something to get the same map on each player
-    - Manage last map
-    - Bug on Game over
+    - ??? Bug on Game over 
     - Timer on map
     - Display end level and game over message to guide
     - Menu navigation
     - Lobby menu
     - Join game menu (Check if a server is up or not)
+    - Set an IP address to connect to
 
 
 Things to implement for the game :
@@ -24,9 +24,10 @@ Things to implement for the game :
     
   - Optimize the game check update/draw method in game
   
+  
   Socket : 
   - Manage disconnect error..
-  -  
+  - Search for friend on the local network ?  
 
  Map class :
  
@@ -54,8 +55,8 @@ Character class:
 General idea :
 
     - 2 player game cooperation
-    - Player 1 don't see the map and has to be guided by the Player 2
-    - ? Player 2 can place item on the map (like bridge)
+    - Blind 1 don't see the map and has to be guided by the Blind 2
+    - ? Blind 2 can place item on the map (like bridge)
 
 Item on the map :
 
