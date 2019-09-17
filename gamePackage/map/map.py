@@ -72,7 +72,7 @@ class Map(object):
             res = Finish(self.__game, values['tile'], values['x'], values['y'])
         elif tile_index == 16:
             Blind(self.__game, values['tile'], values['x'], values['y'])
-            # Quick fix so the Player tile is replaced by a ground tile after he moves for the first time
+            # Quick fix so the blind tile is replaced by a ground tile after he moves for the first time
             # TODO : Is this right ?
             values['tile'] = self.map.tile[8]
             res = self.render_tiles(8, values, tp_manager)
@@ -88,17 +88,17 @@ class Map(object):
         """
         Update sprites
         """
-        self.__game.player.update()
-        # if self.__game.player:
-        #     # pygame.display.update(self.__game.player.rect)
-        #     x = self.__game.player.rect.x
-        #     y = self.__game.player.rect.y
+        self.__game.blind.update()
+        # if self.__game.blind:
+        #     # pygame.display.update(self.__game.blind.rect)
+        #     x = self.__game.blind.rect.x
+        #     y = self.__game.blind.rect.y
         #     rect_to_update = pygame.Rect(x-32, y-32, 96, 96)
         #
         #     pygame.display.update(rect_to_update)
             # self.__game.all_sprites.update()
 
-        # self.__game.player_sprite.update()
+        # self.__game.blind_sprite.update()
         # self.__game.static_sprites.update()
         pygame.display.update()
 
@@ -106,12 +106,12 @@ class Map(object):
         """
         Draw all the sprites
         """
-        # FIXME : For now I draw the Ground sprite on each tick to override where the player image was
-        #         (Only if the player moved)
-        # if self.__game.player.has_moved:
+        # FIXME : For now I draw the Ground sprite on each tick to override where the blind image was
+        #         (Only if the blind moved)
+        # if self.__game.blind.has_moved:
         self.__game.all_sprites.draw(self.screen)
-        self.__game.player.has_moved = False
-        self.__game.player_sprite.draw(self.screen)
+        self.__game.blind.has_moved = False
+        self.__game.blind_sprite.draw(self.screen)
 
     def display_game_over(self):
         # TODO : It's ugly but it works !

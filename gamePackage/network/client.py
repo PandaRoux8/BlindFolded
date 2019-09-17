@@ -16,10 +16,15 @@ class Client(object):
         return sock
 
     def send_new_map(self, map):
+        map = "load_map:%s" % map
         data = map.encode()
         self.socket.sendall(data)
 
-    def send_player_data(self, pos_x, pos_y):
+    def send_reload_game(self):
+        data = "game_reload:".encode()
+        self.socket.sendall(data)
+
+    def send_blind_data(self, pos_x, pos_y):
         # Need to send bytes
         data = ("%s;%s" % (pos_x, pos_y)).encode()
         self.socket.sendall(data)

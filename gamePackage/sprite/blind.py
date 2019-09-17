@@ -11,24 +11,24 @@ class Blind(pygame.sprite.Sprite):
         super(Blind, self).__init__()
         self.__game = game
 
-        # Color of the Player
+        # Color of the blind
         self.image = tile
         # Position of the character in the grid (and his size)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         # self._direction = 'up'
-        # Speed of the Player
+        # Speed of the blind
         self.speed = 32
 
-        # Vector for moving the Player
+        # Vector for moving the blind
         self.vx, self.vy = 0, 0
 
         self.has_moved = True
         self.allow_move = True
 
-        game.player = self
-        game.player_sprite.add(self)
+        game.blind = self
+        game.blind_sprite.add(self)
 
     # @property
     # def direction(self):
@@ -43,10 +43,10 @@ class Blind(pygame.sprite.Sprite):
     # def change_direction(self):
     #     self.image = pygame.transform.flip(self.image, False, True)
 
-    def move_player(self):
+    def move_blind(self):
         self.vx, self.vy = 0, 0
         keys = pygame.key.get_pressed()
-        if not self.__game.server:
+        if type(self.__game).__name__ == "GameBlind":
             # Up
             if keys[pygame.K_w] and self.allow_move:
                 self.vy = -self.speed
@@ -85,16 +85,17 @@ class Blind(pygame.sprite.Sprite):
         """
         Update the character position
         """
-        self.move_player()
-        self.rect.x += self.vx
-        self.__game.collide_with_walls('x')
-        self.rect.y += self.vy
-        self.__game.collide_with_walls('y')
-        self.__game.kill_on_collide()
-        self.__game.teleport_player()
-        self.__game.finish_map()
-        if self.__game.client and self.has_moved:
-            self.__game.client.send_player_data(self.rect.x, self.rect.y)
+        if type(self.__game).__name__ == "GameBlind":
+            self.move_blind()
+            self.rect.x += self.vx
+            self.__game.collide_with_walls('x')
+            self.rect.y += self.vy
+            self.__game.collide_with_walls('y')
+            self.__game.kill_on_collide()
+            self.__game.teleport_blind()
+            self.__game.finish_map()
+            if self.has_moved:
+                self.__game.client.send_blind_data(self.rect.x, self.rect.y)
 
     def check_exit_game(self):
         for event in pygame.event.get():

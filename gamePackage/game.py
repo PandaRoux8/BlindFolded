@@ -6,7 +6,6 @@ from gamePackage.map.map import Map
 class Game(object):
 
     def __init__(self, screen):
-        print("YO GAME")
         # Map loaded in the game
         self.map = None
         # Character of the player
@@ -27,23 +26,23 @@ class Game(object):
         self.blind_sprite = pygame.sprite.Group()
 
         self.load_map(screen)
-        self.run_game()
+        # self.start_game()
+        # self.run_game()
 
     def load_map(self, screen):
-        pass
+        self.start_game()
+
+    def start_game(self):
+        while True:
+            self.run_game()
 
     def run_game(self):
-        while True:
-            self.clock.tick(self.framerate)
-            self.blind.check_exit_game()
-            # Tick for the framerate
-            # TODO : FIXME : Find out how this really works so it can be optimized (drawing updating etc.)
-            self.map.draw()
-            self.map.update()
-            if self.server:
-                self.server.blind = self.blind
-                self.server.game = self
-                self.server.listen()
+        self.clock.tick(self.framerate)
+        self.blind.check_exit_game()
+        # Tick for the framerate
+        # TODO : FIXME : Find out how this really works so it can be optimized (drawing updating etc.)
+        self.map.draw()
+        self.map.update()
 
     def game_over(self):
         """
@@ -66,17 +65,11 @@ class Game(object):
         Reload a new game on the same map
         Delete the old instance of the game and start a new one
         """
-        if self.client:
-            self.client.send_new_map()
-        screen = self.map.screen
-        server = self.server
-        client = self.client
-        del self
-        Game(screen, server=server, client=client)
+        pass
 
     def load_next_map(self):
         self.map.display_end_level_message()
-        self.search_map(done=True)
+        self.search_map()
 
         while not pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.event.pump()

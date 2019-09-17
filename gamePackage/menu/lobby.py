@@ -1,5 +1,5 @@
 import pygame
-from gamePackage.game import Game
+from gamePackage.game_guide import GameGuide
 # import pygameMenu
 # from pygameMenu.locals import *
 from gamePackage.network.server import Server
@@ -18,7 +18,7 @@ class LobbyMenu(object):
         server = LobbyMenu.start_server()
         # TODO : Load menu instead
         #  Straight up start the game for testing purpose
-        Game(self.screen, server=server)
+        GameGuide(self.screen, server=server)
         # TODO : Show the lobby menu ... And start the game afterward
         # self.display_menu()
 

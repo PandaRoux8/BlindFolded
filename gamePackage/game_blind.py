@@ -9,33 +9,34 @@ class GameBlind(Game):
 
     def __init__(self, screen, client):
         self.client = client
-        super(Game, self).__init__(screen)
+        super(GameBlind, self).__init__(screen)
 
     def load_map(self, screen):
         map_name = self.search_map()
         map_path = "../map/%s" % map_name
+        self.client.send_new_map(map_path)
         # Load the map
         self.map = Map(self, screen, map_path)
         self.map.draw_static_sprites()
+        super(GameBlind, self).load_map(screen)
 
     def search_map(self):
         map_order_file = "../map/map_order.xml"
         root = ET.parse(map_order_file).getroot()
         maps = root.findall('map')
-        if done:
-            getnext = False
-            for map in maps:
-                if getnext:
-                    map.set('current', 'True')
-                    break
-                if eval(map.get('current')):
-                    map.set('current', 'False')
-                    getnext = True
+        getnext = False
+        for map in maps:
+            if getnext:
+                map.set('current', 'True')
+                break
+            if eval(map.get('current')):
+                map.set('current', 'False')
+                getnext = True
 
-            with open(map_order_file, 'w') as f:
-                ugly_xml = xml.dom.minidom.parseString(ET.tostring(root))
-                xml_pretty_str = ugly_xml.toprettyxml()
-                f.write(xml_pretty_str)
+        with open(map_order_file, 'w') as f:
+            ugly_xml = xml.dom.minidom.parseString(ET.tostring(root))
+            xml_pretty_str = ugly_xml.toprettyxml()
+            f.write(xml_pretty_str)
 
         for map in maps:
             if eval(map.get('current')):
@@ -55,7 +56,7 @@ class GameBlind(Game):
         """
         Check if the Character collide with any wall.
         Block the character in front of the wall if it's the case.
-        Do it with x or y axis because if we do both at one time it does strange things. (ie the Player teleport)
+        Do it with x or y axis because if we do both at one time it does strange things. (ie the blind teleport)
         """
         block_hit_list = pygame.sprite.spritecollide(self.blind, self.block_sprites, dokill=False)
         for block in block_hit_list:
@@ -89,3 +90,15 @@ class GameBlind(Game):
         block_hit_list = pygame.sprite.spritecollide(self.blind, self.finish_sprite, dokill=False)
         if block_hit_list:
             self.load_next_map()
+
+    def reload_game(self):
+        """
+        Reload a new game on the same map
+        Delete the old instance of the game and start a new one
+        """
+        # self.client.send_new_map()
+        screen = self.map.screen
+        client = self.client
+        client.send_reload_game()
+        del self
+        GameBlind(screen, client)
