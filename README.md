@@ -1,13 +1,13 @@
 IMPORTANT : 
 
-    - Get to next map -> Make something to get the same map on each player
-    - ??? Bug on Game over 
     - Timer on map
     - Display end level and game over message to guide
     - Menu navigation
     - Lobby menu
     - Join game menu (Check if a server is up or not)
     - Set an IP address to connect to
+    
+    BUG -> When dying we go to the next level ^^'
 
 
 Things to implement for the game :
@@ -27,7 +27,8 @@ Things to implement for the game :
   
   Socket : 
   - Manage disconnect error..
-  - Search for friend on the local network ?  
+  - Search for friend on the local network ?
+  - Find a way to close the connection every time
 
  Map class :
  

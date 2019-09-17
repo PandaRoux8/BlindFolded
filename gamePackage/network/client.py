@@ -29,7 +29,20 @@ class Client(object):
         data = ("%s;%s" % (pos_x, pos_y)).encode()
         self.socket.sendall(data)
 
+    def send_display_game_over(self):
+        pass
+        print("Sent1")
+        data = "game_over:".encode()
+        self.socket.send(data)
+
+    def send_display_next_level(self):
+        pass
+        print("Sent2")
+        data = "next_level:".encode()
+        self.socket.send(data)
+
     def __del__(self):
         self.socket.close()
 
-# Client.send_player_data(32, 64)
+    def release(self):
+        self.socket.close()

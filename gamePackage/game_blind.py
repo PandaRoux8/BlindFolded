@@ -102,3 +102,20 @@ class GameBlind(Game):
         client.send_reload_game()
         del self
         GameBlind(screen, client)
+
+    def game_over(self):
+        """
+        Display game over on screen
+        Restart a new game
+        :return:
+        """
+        self.client.send_display_next_level()
+        super(GameBlind, self).game_over()
+
+    def load_next_map(self):
+        self.client.send_display_next_level()
+        super(GameBlind, self).load_next_map()
+
+    def exit_game(self):
+        self.client.release()
+        super(GameBlind, self).exit_game()

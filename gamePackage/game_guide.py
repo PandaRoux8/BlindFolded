@@ -30,3 +30,8 @@ class GameGuide(Game):
         server = self.server
         del self
         GameGuide(screen, server)
+
+    def exit_game(self):
+        self.server.release()
+        super(GameGuide, self).exit_game()
+

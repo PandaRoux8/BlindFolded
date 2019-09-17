@@ -27,7 +27,6 @@ class Game(object):
 
         self.load_map(screen)
         # self.start_game()
-        # self.run_game()
 
     def load_map(self, screen):
         self.start_game()
@@ -67,10 +66,18 @@ class Game(object):
         """
         pass
 
-    def load_next_map(self):
+    # TODO Merge the 2 functions below
+    def next_level(self):
         self.map.display_end_level_message()
-        self.search_map()
+        while not pygame.key.get_pressed()[pygame.K_SPACE]:
+            pygame.event.pump()
+            pygame.display.flip()
+            self.clock.tick(30)
+        self.reload_game()
 
+    def load_next_map(self):
+        self.search_map()
+        self.map.display_end_level_message()
         while not pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.event.pump()
             pygame.display.flip()

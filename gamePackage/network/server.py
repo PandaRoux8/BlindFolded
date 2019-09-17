@@ -19,8 +19,8 @@ class Server(object):
         Check for move from the blind
         """
         data = self.connection.recv(256)
-        print(data)
         if data:
+            print(data)
             data = data.decode()
             if ';' in data:
                 self.update_blind_data(data)
@@ -29,6 +29,12 @@ class Server(object):
             elif 'game_reload:' in data:
                 self.map = None
                 self.game.reload_game()
+            elif 'game_over:' in data:
+                print("GO")
+                self.game.game_over()
+            elif 'next_level:' in data:
+                print("NL", self.game)
+                self.game.next_level()
 
     def start_server(self):
         """
@@ -61,5 +67,9 @@ class Server(object):
         Destructor to close all connection when this object is destroyed
         :return:
         """
+        self.connection.close()
+        self.socket.close()
+
+    def release(self):
         self.connection.close()
         self.socket.close()
