@@ -7,16 +7,18 @@ import xml.dom.minidom
 
 class GameBlind(Game):
 
-    def __init__(self, screen, client):
+    def __init__(self, screen, client, map_file=False):
         self.client = client
+        self.map_path = map_file
         super(GameBlind, self).__init__(screen)
 
     def load_map(self, screen):
-        map_name = self.search_map()
-        map_path = "../map/%s" % map_name
-        self.client.send_new_map(map_path)
+        if not self.map_path:
+            map_name = self.search_map()
+            self.map_path = "../map/%s" % map_name
+        self.client.send_new_map(self.map_path)
         # Load the map
-        self.map = Map(self, screen, map_path)
+        self.map = Map(self, screen, self.map_path)
         self.map.draw_static_sprites()
         super(GameBlind, self).load_map(screen)
 
@@ -91,17 +93,22 @@ class GameBlind(Game):
         if block_hit_list:
             self.load_next_map()
 
-    def reload_game(self):
+    def reload_game(self, from_game_over=False):
         """
         Reload a new game on the same map
         Delete the old instance of the game and start a new one
         """
+        # Wait for the guide to be ready
+        self.client.check_server_ready()
         # self.client.send_new_map()
         screen = self.map.screen
         client = self.client
-        client.send_reload_game()
+        map_path = False
+        if from_game_over:
+            map_path = self.map_path
+        # client.send_reload_game()
         del self
-        GameBlind(screen, client)
+        GameBlind(screen, client, map_path)
 
     def game_over(self):
         """
@@ -109,7 +116,7 @@ class GameBlind(Game):
         Restart a new game
         :return:
         """
-        self.client.send_display_next_level()
+        self.client.send_display_game_over()
         super(GameBlind, self).game_over()
 
     def load_next_map(self):

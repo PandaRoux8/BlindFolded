@@ -50,16 +50,13 @@ class Game(object):
         :return:
         """
         self.map.display_game_over()
-
-        # TODO : More MVC ? Place it on the controller
         while not pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.event.pump()
             pygame.display.flip()
             self.clock.tick(30)
+        self.reload_game(from_game_over=True)
 
-        self.reload_game()
-
-    def reload_game(self):
+    def reload_game(self, from_game_over=False):
         """
         Reload a new game on the same map
         Delete the old instance of the game and start a new one

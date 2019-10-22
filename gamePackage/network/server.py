@@ -22,19 +22,34 @@ class Server(object):
         if data:
             print(data)
             data = data.decode()
-            if ';' in data:
-                self.update_blind_data(data)
-            elif 'load_map:' in data:
-                self.map = data.split('load_map:')[1]
-            elif 'game_reload:' in data:
-                self.map = None
-                self.game.reload_game()
-            elif 'game_over:' in data:
-                print("GO")
-                self.game.game_over()
-            elif 'next_level:' in data:
-                print("NL", self.game)
-                self.game.next_level()
+            if data.count('$') == 1:
+                # Remove trailing char $
+                data = data[:-1]
+                self.read_data(data)
+            else:
+                datas = data.split('$')
+                print("Datas", datas)
+                # Remove last index as split() leaves an empty char at the end
+                del datas[-1]
+                for data in datas:
+                    # Remove trailing char $
+                    self.read_data(data)
+
+    def read_data(self, data):
+        if ';' in data:
+            self.update_blind_data(data)
+        elif 'load_map:' in data:
+            print("MAP", data)
+            self.map = data.split('load_map:')[1]
+        elif 'game_reload:' in data:
+            self.map = None
+            self.game.reload_game()
+        elif 'game_over:' in data:
+            self.game.game_over()
+        elif 'next_level:' in data:
+            self.game.next_level()
+        elif 'client_ready' in data:
+            pass
 
     def start_server(self):
         """
@@ -53,6 +68,19 @@ class Server(object):
         if self.blind:
             x, y = data.split(';')
             self.blind.update_position(x, y)
+
+    def check_client_ready(self):
+        while True:
+            data = self.connection.recv(256)
+            print(data)
+            if data:
+                data = data.decode()
+                if data.count('$') == 1:
+                    data = data[:-1]
+                    if data == 'client_ready':
+                        server_data = 'server_ready$'.encode()
+                        self.connection.sendall(server_data)
+                        break
 
     @staticmethod
     def check_connection():

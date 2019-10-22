@@ -6,9 +6,7 @@ IMPORTANT :
     - Lobby menu
     - Join game menu (Check if a server is up or not)
     - Set an IP address to connect to
-    
-    BUG -> When dying we go to the next level ^^'
-
+     
 
 Things to implement for the game :
 
@@ -85,3 +83,6 @@ Make a script to put header on each python file.
 # Mail      : jules.schluchter@gmail.com
 # Date      : <today>
 # Module    : BlindFolded Game  
+
+
+Evolution du jeu -> Jeu 4 player Genre shooter avec discussion au centre du jeu...
