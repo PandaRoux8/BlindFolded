@@ -1,7 +1,6 @@
 import pygame
 from gamePackage.game_guide import GameGuide
 import pygameMenu
-from pygameMenu.locals import *
 from gamePackage.network.server import Server
 
 
@@ -13,29 +12,38 @@ class LobbyMenu(pygameMenu.Menu):
         self.screen = screen
         self._width = resolution[0]
         self._height = resolution[1]
-        self.font = pygameMenu.fonts.FONT_NEVIS
-        print(self.font)
-        super(LobbyMenu, self).__init__(self.screen, self._width, self._height, self.font, 'Connection Menu', bgfun=lambda: self.screen.fill((0, 255, 100)))
+        self.font = pygameMenu.font.FONT_NEVIS
+        super(LobbyMenu, self).__init__(self.screen, self._width, self._height, self.font, 'Connection Menu',
+                                        bgfun=lambda: self.screen.fill((0, 255, 100)))
         # TODO : Show the lobby menu ... And start the game afterward
         self.display_menu()
-        server = LobbyMenu.start_server()
-        # TODO : Load menu instead
-        #  Straight up start the game for testing purpose
-        GameGuide(self.screen, server=server)
+        # server = LobbyMenu.start_server()
+        # # TODO : Load menu instead
+        # #  Straight up start the game for testing purpose
+        # GameGuide(self.screen, server=server)
+        # server.release()
+
+    def connect(self):
+        input_data = self.get_input_data()
+        screen = self.screen
+        server = LobbyMenu.start_server(input_data.get('ip'))
+        self.disable()
+        del self
+        GameGuide(screen, server=server)
         server.release()
 
     @staticmethod
-    def start_server():
-        server = Server()
+    def start_server(ip_address):
+        server = Server(ip_address)
         # This method ends when a connection is made
         server.start_server()
         return server
 
     def display_menu(self):
-        print(self)
-        # self.add_line("IP address")
-        self.add_option("Ip address")
-        self.enable()
+        self.add_text_input("IP Address : ", textinput_id='ip', default='127.0.0.1', input_underline="_")
+        self.add_option("Connect", lambda: self.connect())
+        # TODO : Make this work
+        self.add_option("Back", lambda: self._close())
         events = pygame.event.get()
         self.mainloop(events)
 

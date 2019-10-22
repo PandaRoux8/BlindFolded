@@ -1,11 +1,10 @@
 import pygame
 from gamePackage.game_blind import GameBlind
 import pygameMenu
-# from pygameMenu.locals import *
 from gamePackage.network.client import Client
 
 
-class JoinMenu(object):
+class JoinMenu(pygameMenu.Menu):
 
     # TODO ::
     def __init__(self, screen, resolution):
@@ -13,14 +12,31 @@ class JoinMenu(object):
         self.screen = screen
         self._width = resolution[0]
         self._height = resolution[1]
-        self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
-        super(JoinMenu, self).__init__()
-        client = Client()
+        self.font = pygameMenu.font.FONT_NEVIS
+        super(JoinMenu, self).__init__(self.screen, self._width, self._height, self.font, 'Connection Menu',
+                                       bgfun=lambda: self.screen.fill((0, 255, 100)))
         # TODO : Show the lobby menu ... And start the game afterward
-        # self.display_menu()
+        self.display_menu()
         # Straight up start the game for testing purpose
-        GameBlind(self.screen, client)
+        # GameBlind(self.screen, client)
+        # client.release()
+
+    def connect(self):
+        input_data = self.get_input_data()
+        client = Client(input_data.get('ip'))
+        screen = self.screen
+        self.disable()
+        del self
+        GameBlind(screen, client)
         client.release()
+
+    def display_menu(self):
+        self.add_text_input("IP Address : ", textinput_id='ip', default='127.0.0.1', input_underline="_")
+        self.add_option("Connect", lambda: self.connect())
+        # TODO : Make this work
+        self.add_option("Back", lambda: self._close())
+        events = pygame.event.get()
+        self.mainloop(events)
 
     # def display_menu(self):
     #     text = self.font.render("GOOD JOB ", 1, (255, 255, 255))

@@ -1,12 +1,13 @@
 import socket
 
-HOST = '127.0.0.1'
+# HOST = '127.0.0.1'
 PORT = 37666
 
 
 class Server(object):
 
-    def __init__(self):
+    def __init__(self, client_ip):
+        self.client_ip = client_ip
         self.blind = None
         self.socket = None
         self.connection = None
@@ -56,7 +57,7 @@ class Server(object):
         Start the server
         """
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.bind((HOST, PORT))
+        self.socket.bind((self.client_ip, PORT))
         self.socket.listen(37666)
         self.connection, self.address = self.socket.accept()
 
@@ -90,13 +91,13 @@ class Server(object):
         """
         return True
 
-    def __del__(self):
-        """
-        Destructor to close all connection when this object is destroyed
-        :return:
-        """
-        self.connection.close()
-        self.socket.close()
+    # def __del__(self):
+    #     """
+    #     Destructor to close all connection when this object is destroyed
+    #     :return:
+    #     """
+    #     self.connection.close()
+    #     self.socket.close()
 
     def release(self):
         self.connection.close()

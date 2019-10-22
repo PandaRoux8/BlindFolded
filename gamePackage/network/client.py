@@ -1,19 +1,20 @@
 import socket
 from time import sleep
 
-SERVER_IP = '127.0.0.1'
+# SERVER_IP = '127.0.0.1'
 PORT = 37666
 
 
 class Client(object):
 
-    def __init__(self):
-        self.socket = self.connect()
+    def __init__(self, server_ip):
+        self.server_ip = server_ip
+        self.socket = self.connect(server_ip)
 
     @staticmethod
-    def connect():
+    def connect(server_ip):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((SERVER_IP, PORT))
+        sock.connect((server_ip, PORT))
         return sock
 
     def send_new_map(self, map):

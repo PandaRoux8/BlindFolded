@@ -1,11 +1,11 @@
 import pygame
-from gamePackage.game import Game
+from gamePackage.game import AbstractGame
 from gamePackage.map.map import Map
 from xml.etree import ElementTree as ET
 import xml.dom.minidom
 
 
-class GameBlind(Game):
+class GameBlind(AbstractGame):
 
     def __init__(self, screen, client, map_file=False):
         self.client = client
@@ -22,7 +22,8 @@ class GameBlind(Game):
         self.map.draw_static_sprites()
         super(GameBlind, self).load_map(screen)
 
-    def search_map(self):
+    @staticmethod
+    def search_map():
         map_order_file = "../map/map_order.xml"
         root = ET.parse(map_order_file).getroot()
         maps = root.findall('map')
@@ -95,7 +96,7 @@ class GameBlind(Game):
 
     def reload_game(self, from_game_over=False):
         """
-        Reload a new game on the same map
+        Reload a new game
         Delete the old instance of the game and start a new one
         """
         # Wait for the guide to be ready
@@ -121,6 +122,7 @@ class GameBlind(Game):
 
     def load_next_map(self):
         self.client.send_display_next_level()
+        self.search_map()
         super(GameBlind, self).load_next_map()
 
     def exit_game(self):

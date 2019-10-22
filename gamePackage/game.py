@@ -3,7 +3,7 @@ import pygame
 from gamePackage.map.map import Map
 
 
-class Game(object):
+class AbstractGame:
 
     def __init__(self, screen):
         # Map loaded in the game
@@ -73,7 +73,6 @@ class Game(object):
         self.reload_game()
 
     def load_next_map(self):
-        self.search_map()
         self.map.display_end_level_message()
         while not pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.event.pump()

@@ -4,9 +4,8 @@ IMPORTANT :
     - Menu navigation
     - Lobby menu
     - Join game menu (Check if a server is up or not)
-    - Set an IP address to connect to
-     
-
+    - Make menu more beautiful
+    
 Things to implement for the game :
 
   - A main menu
