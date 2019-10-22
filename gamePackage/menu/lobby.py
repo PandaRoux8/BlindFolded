@@ -1,11 +1,11 @@
 import pygame
 from gamePackage.game_guide import GameGuide
-# import pygameMenu
-# from pygameMenu.locals import *
+import pygameMenu
+from pygameMenu.locals import *
 from gamePackage.network.server import Server
 
 
-class LobbyMenu(object):
+class LobbyMenu(pygameMenu.Menu):
 
     # TODO ::
     def __init__(self, screen, resolution):
@@ -13,11 +13,12 @@ class LobbyMenu(object):
         self.screen = screen
         self._width = resolution[0]
         self._height = resolution[1]
-        self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
-        super(LobbyMenu, self).__init__()
-        server = LobbyMenu.start_server()
+        self.font = pygameMenu.fonts.FONT_NEVIS
+        print(self.font)
+        super(LobbyMenu, self).__init__(self.screen, self._width, self._height, self.font, 'Connection Menu', bgfun=lambda: self.screen.fill((0, 255, 100)))
         # TODO : Show the lobby menu ... And start the game afterward
-        # self.display_menu()
+        self.display_menu()
+        server = LobbyMenu.start_server()
         # TODO : Load menu instead
         #  Straight up start the game for testing purpose
         GameGuide(self.screen, server=server)
@@ -29,6 +30,14 @@ class LobbyMenu(object):
         # This method ends when a connection is made
         server.start_server()
         return server
+
+    def display_menu(self):
+        print(self)
+        # self.add_line("IP address")
+        self.add_option("Ip address")
+        self.enable()
+        events = pygame.event.get()
+        self.mainloop(events)
 
     # def display_menu(self):
     #     text = self.font.render("GOOD JOB ", 1, (255, 255, 255))

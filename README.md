@@ -1,7 +1,6 @@
 IMPORTANT : 
 
     - Timer on map
-    - Display end level and game over message to guide
     - Menu navigation
     - Lobby menu
     - Join game menu (Check if a server is up or not)
