@@ -14,6 +14,7 @@ class Server(object):
         self.address = None
         self.game = None
         self.map = None
+        self.map_timer = None
 
     def listen(self):
         """
@@ -29,7 +30,7 @@ class Server(object):
                 self.read_data(data)
             else:
                 datas = data.split('$')
-                print("Datas", datas)
+                print(datas)
                 # Remove last index as split() leaves an empty char at the end
                 del datas[-1]
                 for data in datas:
@@ -40,8 +41,10 @@ class Server(object):
         if ';' in data:
             self.update_blind_data(data)
         elif 'load_map:' in data:
-            print("MAP", data)
             self.map = data.split('load_map:')[1]
+        elif 'map_timer:' in data:
+            print(data, data.split('map_timer:'))
+            self.map_timer = data.split('map_timer:')[1]
         elif 'game_reload:' in data:
             self.map = None
             self.game.reload_game()

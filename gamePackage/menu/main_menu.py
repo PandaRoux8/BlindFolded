@@ -1,8 +1,8 @@
 import pygame
 import pygameMenu
-from gamePackage.menu.lobby import LobbyMenu
+from gamePackage.menu.guide_menu import GuideMenu
 from gamePackage.menu.options import OptionsMenu
-from gamePackage.menu.join_menu import JoinMenu
+from gamePackage.menu.blind_menu import BlindMenu
 
 
 class MainMenu(pygameMenu.menu.Menu):
@@ -29,11 +29,11 @@ class MainMenu(pygameMenu.menu.Menu):
 
     def _call_lobby(self):
         self.disable()
-        LobbyMenu(self.screen, (self._width, self._height))
+        GuideMenu(self.screen, (self._width, self._height))
 
     def _call_join_menu(self):
         self.disable()
-        JoinMenu(self.screen, (self._width, self._height))
+        BlindMenu(self.screen, (self._width, self._height))
 
     def _call_options(self):
         self.disable()

@@ -17,8 +17,8 @@ class Client(object):
         sock.connect((server_ip, PORT))
         return sock
 
-    def send_new_map(self, map):
-        map = "load_map:%s$" % map
+    def send_new_map(self, map, map_timer):
+        map = "load_map:%s$map_timer:%s$" % (map, map_timer)
         data = map.encode()
         self.socket.sendall(data)
 

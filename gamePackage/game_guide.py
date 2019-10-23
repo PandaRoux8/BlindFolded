@@ -19,7 +19,7 @@ class GameGuide(AbstractGame):
             self.server.listen()
         map_path = self.server.map
         # Load the map
-        self.map = Map(self, screen, map_path)
+        self.map = Map(self, screen, map_path, self.server.map_timer)
         self.map.draw_static_sprites()
         super(GameGuide, self).load_map(screen)
 

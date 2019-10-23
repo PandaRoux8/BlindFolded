@@ -4,17 +4,16 @@ import pygameMenu
 from gamePackage.network.client import Client
 
 
-class JoinMenu(pygameMenu.Menu):
+class BlindMenu(pygameMenu.Menu):
 
-    # TODO ::
     def __init__(self, screen, resolution):
         # Init the screen size
         self.screen = screen
         self._width = resolution[0]
         self._height = resolution[1]
         self.font = pygameMenu.font.FONT_NEVIS
-        super(JoinMenu, self).__init__(self.screen, self._width, self._height, self.font, 'Connection Menu',
-                                       bgfun=lambda: self.screen.fill((0, 255, 100)))
+        super(BlindMenu, self).__init__(self.screen, self._width, self._height, self.font, 'Connection Menu',
+                                        bgfun=lambda: self.screen.fill((0, 255, 100)))
         # TODO : Show the lobby menu ... And start the game afterward
         self.display_menu()
         # Straight up start the game for testing purpose

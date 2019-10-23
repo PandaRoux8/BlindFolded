@@ -19,7 +19,7 @@ class InGameMenu(pygameMenu.Menu):
         self.height = resolution[1]
         # set a default display
         self.display = None
-        super(InGameMenu, self).__init__(self.screen, self.width, self.height, pygameMenu.fonts.FONT_NEVIS,
+        super(InGameMenu, self).__init__(self.screen, self.width, self.height, pygameMenu.font.FONT_NEVIS,
                                          'Options', bgfun=lambda: self.screen.fill((0, 255, 100)))
         InGameMenu.__instance = self
         self.add_option("Back to game", lambda: self.disable())

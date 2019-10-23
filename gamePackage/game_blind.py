@@ -16,9 +16,10 @@ class GameBlind(AbstractGame):
         if not self.map_path:
             map_name = self.search_map()
             self.map_path = "../map/%s" % map_name
-        self.client.send_new_map(self.map_path)
+        self.client.send_new_map(self.map_path, self.get_map_timer())
+        # self.client.send_map_timer()
         # Load the map
-        self.map = Map(self, screen, self.map_path)
+        self.map = Map(self, screen, self.map_path, self.get_map_timer())
         self.map.draw_static_sprites()
         super(GameBlind, self).load_map(screen)
 
@@ -54,6 +55,15 @@ class GameBlind(AbstractGame):
             f.write(xml_pretty_str)
 
         return map1.text
+
+    @staticmethod
+    def get_map_timer():
+        map_order_file = "../map/map_order.xml"
+        root = ET.parse(map_order_file).getroot()
+        maps = root.findall('map')
+        for map in maps:
+            if eval(map.get('current')):
+                return map.get('timer')
 
     def collide_with_walls(self, axis=None):
         """

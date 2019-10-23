@@ -8,12 +8,16 @@ from gamePackage.sprite.turret import Turret
 from gamePackage.sprite.finish import Finish
 from gamePackage.sprite.teleporter import TeleporterManager
 
+MAP_TIMER = pygame.USEREVENT + 2
+
 
 class Map(object):
-    def __init__(self, game, screen, map_file):
+    def __init__(self, game, screen, map_file, map_timer):
         self.map = MapParser(map_file)
+        self.timer = int(map_timer)
         self.__game = game
         self.screen = screen
+        pygame.time.set_timer(MAP_TIMER, 1000)
         # Select a font for the game
         pygame.font.init()
         self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
@@ -100,6 +104,7 @@ class Map(object):
 
         # self.__game.blind_sprite.update()
         # self.__game.static_sprites.update()
+        self.display_timer()
         pygame.display.update()
 
     def draw(self):
@@ -127,3 +132,12 @@ class Map(object):
         text2 = font2.render("Press Space to go to next level", 1, (255, 255, 255))
         self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
         self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
+
+    def display_timer(self, position='bot_right'):
+        for event in pygame.event.get():
+            if event.type == MAP_TIMER:
+                self.timer -= 1
+                print("YYOYOOYOYO")
+        print(self.timer)
+        text = self.font.render(str(self.timer), 1, (255, 255, 255))
+        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
