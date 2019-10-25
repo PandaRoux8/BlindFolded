@@ -30,19 +30,6 @@ class Blind(pygame.sprite.Sprite):
         game.blind = self
         game.blind_sprite.add(self)
 
-    # @property
-    # def direction(self):
-    #     return self._direction
-    #
-    # @direction.setter
-    # def direction(self, value):
-    #     if self._direction != value:
-    #         self._direction = value
-    #         self.change_direction()
-    #
-    # def change_direction(self):
-    #     self.image = pygame.transform.flip(self.image, False, True)
-
     def move_blind(self):
         self.vx, self.vy = 0, 0
         keys = pygame.key.get_pressed()
@@ -101,5 +88,5 @@ class Blind(pygame.sprite.Sprite):
         for event in pygame.event.get():
             if event.type == ALLOW_MOVE:
                 self.allow_move = True
-            if event.type == QUIT:
+            if event.type == pygame.QUIT:
                 self.__game.exit_game()

@@ -2,6 +2,7 @@ import socket
 
 # HOST = '127.0.0.1'
 PORT = 37666
+SOCKET_TIMEOUT = 1
 
 
 class Server(object):
@@ -20,7 +21,12 @@ class Server(object):
         """
         Check for move from the blind
         """
-        data = self.connection.recv(256)
+        try:
+            # If we don't receive any data during the timeout an exception is raised, we just need to wait until we have
+            # a data, and not being stuck on receive
+            data = self.connection.recv(256)
+        except socket.timeout:
+            data = None
         if data:
             print(data)
             data = data.decode()
@@ -52,17 +58,18 @@ class Server(object):
             self.game.game_over()
         elif 'next_level:' in data:
             self.game.next_level()
-        elif 'client_ready' in data:
-            pass
 
     def start_server(self):
         """
         Start the server
         """
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.socket.bind((self.client_ip, PORT))
         self.socket.listen(37666)
         self.connection, self.address = self.socket.accept()
+        # Set a timeout on the connection otherwise the system will be stuck on recv() until it receive some data
+        self.connection.settimeout(SOCKET_TIMEOUT)
 
     def update_blind_data(self, data):
         """

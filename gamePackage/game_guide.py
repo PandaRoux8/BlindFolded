@@ -14,7 +14,7 @@ class GameGuide(AbstractGame):
         :param screen:
         :return:
         """
-        # Wait for map to be loaded
+        # Wait for map to be loaded on blind and sent here
         while not self.server.map:
             self.server.listen()
         map_path = self.server.map

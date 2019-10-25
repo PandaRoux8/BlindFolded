@@ -17,11 +17,14 @@ class GameBlind(AbstractGame):
             map_name = self.search_map()
             self.map_path = "../map/%s" % map_name
         self.client.send_new_map(self.map_path, self.get_map_timer())
-        # self.client.send_map_timer()
         # Load the map
         self.map = Map(self, screen, self.map_path, self.get_map_timer())
         self.map.draw_static_sprites()
         super(GameBlind, self).load_map(screen)
+
+    def run_game(self):
+        super(GameBlind, self).run_game()
+        self.is_map_timer_done()
 
     @staticmethod
     def search_map():
@@ -120,6 +123,10 @@ class GameBlind(AbstractGame):
         # client.send_reload_game()
         del self
         GameBlind(screen, client, map_path)
+
+    def is_map_timer_done(self):
+        if self.map.timer_done:
+            self.game_over()
 
     def game_over(self):
         """

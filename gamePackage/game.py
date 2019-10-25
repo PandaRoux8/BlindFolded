@@ -26,12 +26,13 @@ class AbstractGame:
         self.blind_sprite = pygame.sprite.Group()
 
         self.load_map(screen)
-        # self.start_game()
-
-    def load_map(self, screen):
         self.start_game()
 
+    def load_map(self, screen):
+        pass
+
     def start_game(self):
+        # While true here and not in run game, so we can inherit run_game method and add things to do in the loop
         while True:
             self.run_game()
 

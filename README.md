@@ -1,6 +1,6 @@
 IMPORTANT : 
 
-    - Timer on map
+    - Timer on map (Fix it as it isn't updated on guide)
     - Menu navigation
     - Lobby menu
     - Join game menu (Check if a server is up or not)
