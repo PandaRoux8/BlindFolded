@@ -9,7 +9,7 @@ class Blind(pygame.sprite.Sprite):
 
     def __init__(self, game, tile, x, y):
         super(Blind, self).__init__()
-        self.__game = game
+        self._game = game
 
         # Color of the blind
         self.image = tile
@@ -33,7 +33,7 @@ class Blind(pygame.sprite.Sprite):
     def move_blind(self):
         self.vx, self.vy = 0, 0
         keys = pygame.key.get_pressed()
-        if type(self.__game).__name__ == "GameBlind":
+        if type(self._game).__name__ == "GameBlind":
             # Up
             if keys[pygame.K_w] and self.allow_move:
                 self.vy = -self.speed
@@ -61,10 +61,11 @@ class Blind(pygame.sprite.Sprite):
 
         # Go to escape menu
         if keys[pygame.K_ESCAPE]:
-            menu = InGameMenu.get_instance(self.__game.screen, (1600, 900))
+            menu = InGameMenu.get_instance(self._game.screen, (1600, 900))
             menu.display_menu()
 
     def update_position(self, pos_x, pos_y):
+        print("UP", pos_x, pos_y)
         self.rect.x = int(pos_x)
         self.rect.y = int(pos_y)
 
@@ -72,21 +73,20 @@ class Blind(pygame.sprite.Sprite):
         """
         Update the character position
         """
-        if type(self.__game).__name__ == "GameBlind":
+        if type(self._game).__name__ == "GameBlind":
             self.move_blind()
             self.rect.x += self.vx
-            self.__game.collide_with_walls('x')
+            self._game.check_collision_with_walls('x')
             self.rect.y += self.vy
-            self.__game.collide_with_walls('y')
-            self.__game.kill_on_collide()
-            self.__game.teleport_blind()
-            self.__game.finish_map()
+            self._game.check_collision_with_walls('y')
+            self._game.check_collision_with_kill_sprite()
+            self._game.check_collision_teleporter()
+            self._game.check_end_level()
             if self.has_moved:
-                self.__game.client.send_blind_data(self.rect.x, self.rect.y)
+                self._game.client.send_blind_data(self.rect.x, self.rect.y)
+            self.check_allow_move()
 
-    def check_exit_game(self):
+    def check_allow_move(self):
         for event in pygame.event.get():
             if event.type == ALLOW_MOVE:
                 self.allow_move = True
-            if event.type == pygame.QUIT:
-                self.__game.exit_game()

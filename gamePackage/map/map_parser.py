@@ -1,16 +1,13 @@
 # coding: utf-8
-from xml.etree import ElementTree as ET
 import pygame
-import sys
-
-DIR_MAP = "../map/"
-DIR_TILESET = "../map/tileset/"
+from gamePackage import constants
+from xml.etree import ElementTree as ET
 
 
 class MapParser(object):
     def __init__(self, file):
-        self.__file = ET.parse(file)
-        self.__root = ET.parse(file).getroot()
+        self._file = ET.parse(file)
+        self._root = ET.parse(file).getroot()
         self._width = self._get_width()
         self._height = self._get_height()
         self._tileHeight = self._get_tile_height()
@@ -20,35 +17,35 @@ class MapParser(object):
 
     def _get_width(self):
         res = None
-        if self.__root.tag == 'map':
-            res = self.__root.attrib.get('width')
+        if self._root.tag == 'map':
+            res = self._root.attrib.get('width')
             res = not res or int(res)
         return res
 
     def _get_height(self):
         res = None
-        if self.__root.tag == 'map':
-            res = self.__root.attrib.get('height')
+        if self._root.tag == 'map':
+            res = self._root.attrib.get('height')
             res = not res or int(res)
         return res
 
     def _get_tile_width(self):
         res = None
-        if self.__root.tag == 'map':
-            res = self.__root.attrib.get('tilewidth')
+        if self._root.tag == 'map':
+            res = self._root.attrib.get('tilewidth')
             res = not res or int(res)
         return res
 
     def _get_tile_height(self):
         res = None
-        if self.__root.tag == 'map':
-            res = self.__root.attrib.get('tileheight')
+        if self._root.tag == 'map':
+            res = self._root.attrib.get('tileheight')
             res = not res or int(res)
         return res
 
     def get_map(self):
         # Don't take layer into account for now
-        data = self.__root.find('layer').find('data')
+        data = self._root.find('layer').find('data')
         data_clean = data.text.replace('\n', '')
 
         # Only support left-down for now
@@ -67,8 +64,8 @@ class MapParser(object):
         Get the tile from the MAP tsx file
         :return: List of tiles (pygame.Surface)
         """
-        tile_file = self.__root.find('tileset').attrib.get('source')
-        tile_path = DIR_MAP + tile_file
+        tile_file = self._root.find('tileset').attrib.get('source')
+        tile_path = constants.DIR_MAP + tile_file
         return self.split_tile(tile_path)
 
     def split_tile(self, tile_file):
@@ -81,7 +78,7 @@ class MapParser(object):
         tile = ET.parse(tile_file)
         image = tile.getroot().find('image')
         source_img = image.attrib.get('source')
-        img_path = DIR_TILESET + source_img
+        img_path = constants.DIR_TILESET + source_img
         image = pygame.image.load(img_path).convert()
         image_width, image_height = image.get_size()
         tiles = []
