@@ -1,20 +1,19 @@
 import pygame
-from gamePackage.game_guide import GameGuide
 import pygameMenu
+from gamePackage import constants
+from gamePackage.game_guide import GameGuide
 from gamePackage.network.server import Server
 
 
 class GuideMenu(pygameMenu.Menu):
 
     # TODO ::
-    def __init__(self, screen, resolution):
+    def __init__(self, screen):
         # Init the screen size
         self.screen = screen
-        self._width = resolution[0]
-        self._height = resolution[1]
         self.font = pygameMenu.font.FONT_NEVIS
-        super(GuideMenu, self).__init__(self.screen, self._width, self._height, self.font, 'Connection Menu',
-                                        bgfun=lambda: self.screen.fill((0, 255, 100)))
+        super(GuideMenu, self).__init__(self.screen, constants.WIDTH, constants.HEIGHT, constants.FONT,
+                                        constants.WINDOW_TITLE, bgfun=lambda: self.screen.fill(constants.MENU_COLOR))
         # TODO : Show the lobby menu ... And start the game afterward
         self.display_menu()
         # server = LobbyMenu.start_server()

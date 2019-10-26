@@ -1,5 +1,6 @@
 import pygame
 from gamePackage.menu import main_menu
+from gamePackage import constants
 
 if __name__ == "__main__":
     # Initialize pygame
@@ -7,9 +8,8 @@ if __name__ == "__main__":
     # Set title of the window
     pygame.display.set_caption('Blindfolded')
     # Screen size
-    width = 832
-    height = 832
+    width = constants.HEIGHT
+    height = constants.WIDTH
     # Init the screen size
     screen = pygame.display.set_mode((width, height))
-    clock = pygame.time.Clock()
-    main_menu = main_menu.MainMenu(screen, (width, height))
+    main_menu = main_menu.MainMenu(screen)
