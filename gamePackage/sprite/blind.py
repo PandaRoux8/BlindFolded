@@ -65,7 +65,6 @@ class Blind(pygame.sprite.Sprite):
             menu.display_menu()
 
     def update_position(self, pos_x, pos_y):
-        print("UP", pos_x, pos_y)
         self.rect.x = int(pos_x)
         self.rect.y = int(pos_y)
 

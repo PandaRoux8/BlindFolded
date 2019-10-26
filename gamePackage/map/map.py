@@ -1,4 +1,5 @@
 import pygame
+from gamePackage import constants
 from gamePackage.map.map_parser import MapParser
 from gamePackage.sprite.ground import Ground
 from gamePackage.sprite.blind import Blind
@@ -21,9 +22,9 @@ class Map(object):
 
         self.__game = game
         self.screen = screen
-        # Select a font for the game
-        pygame.font.init()
-        self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
+        # # Select a font for the game
+        # pygame.font.init()
+        # self.font = pygame.font.SysFont(constants.FONT, 50)
         self.render_map()
 
     def render_map(self):
@@ -110,19 +111,19 @@ class Map(object):
         self.__game.blind_sprite.draw(self.screen)
 
     def display_game_over(self):
-        # TODO : It's ugly but it works !
-        text = self.font.render("GAME OVER", 1, (255, 255, 255))
-        font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
-        text2 = font2.render("Press Space to continue", 1, (255, 255, 255))
-        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
-        self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
+        self.display_message("GAME OVER", "Press Space to continue")
 
     def display_end_level_message(self):
-        text = self.font.render("GOOD JOB ", 1, (255, 255, 255))
-        font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
-        text2 = font2.render("Press Space to go to next level", 1, (255, 255, 255))
-        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
-        self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
+        self.display_message("GOOD JOB", "Press Space to go to next level")
+
+    def display_message(self, text1, text2):
+        # TODO : This is ugly
+        font1 = pygame.font.SysFont(constants.FONT, 50)
+        font2 = pygame.font.SysFont(constants.FONT, 16)
+        displayed_text1 = font1.render(text1, 1, constants.FONT_COLOR)
+        displayed_text2 = font2.render(text2, 1, constants.FONT_COLOR)
+        self.screen.blit(displayed_text1, (constants.WIDTH / 2 - 95, constants.HEIGHT / 2))
+        self.screen.blit(displayed_text2, (constants.WIDTH / 2 - 95, constants.HEIGHT / 2 + 32))
 
     def display_timer(self, position='bot_right'):
         self.timer -= self.delta_time
@@ -130,5 +131,6 @@ class Map(object):
             self.timer_done = True
         self.delta_time = self.clock.tick(30) / 1000
 
-        text = self.font.render(str(int(self.timer)), 1, (255, 255, 255))
+        font = pygame.font.SysFont(constants.FONT, 40)
+        text = font.render(str(int(self.timer)), 1, constants.FONT_COLOR)
         self.screen.blit(text, (0, 0))

@@ -6,10 +6,10 @@ class Server(object):
 
     def __init__(self, client_ip):
         self._client_ip = client_ip
-        self.blind = None
         self._socket = None
         self._connection = None
         self._address = None
+        self.blind = None
         self.game = None
         self.map = None
         self.map_timer = None
@@ -52,7 +52,6 @@ class Server(object):
                 self._read_data(data)
             else:
                 datas = data.split('$')
-                print(datas)
                 # Remove last index as split() leaves an empty char at the end
                 del datas[-1]
                 for data in datas:
@@ -83,10 +82,8 @@ class Server(object):
         Update the blind position
         :param data: x and y position as string and separated by a ;
         """
-        print("Yo", data)
         if self.blind:
             x, y = data.split(';')
-            print(self.blind)
             self.blind.update_position(x, y)
 
     def check_client_ready(self):
