@@ -3,16 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="308e70ce-e79f-49c1-864b-95dea2cb591c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/game_blind.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game_blind.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/game_guide.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game_guide.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/map/map.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/map/map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/menu/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/menu/ingame_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/ingame_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/menu/join_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/blind_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/menu/lobby.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/guide_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/__main__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/menu/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/main_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/network/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/network/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/network/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/network/server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/map/map_order.xml" beforeDir="false" afterPath="$PROJECT_DIR$/map/map_order.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/bin/activate" beforeDir="false" afterPath="$PROJECT_DIR$/venv/bin/activate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/bin/activate.csh" beforeDir="false" afterPath="$PROJECT_DIR$/venv/bin/activate.csh" afterDir="false" />
@@ -809,8 +801,15 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gamePackage/sprite" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gamePackage/__main__.py" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings>
+        <option name="useSoftWraps" value="true" />
+      </console-settings>
+    </option>
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -837,9 +836,9 @@
       <module name="BlindFolded" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gamePackage" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -938,6 +937,7 @@
       <workItem from="1566982308807" duration="2173000" />
       <workItem from="1571759837331" duration="12265000" />
       <workItem from="1571814041384" duration="3869000" />
+      <workItem from="1572087312963" duration="4261000" />
     </task>
     <task id="LOCAL-00001" summary="Copy an other dir">
       <created>1559664798722</created>
@@ -1106,6 +1106,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="useless" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/BlindFolded$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1571816837938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gamePackage" />
+    <SUITE FILE_PATH="coverage/BlindFolded$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1572090015399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gamePackage" />
   </component>
 </project>
