@@ -61,7 +61,7 @@ class MapParser(object):
 
     def get_tile(self):
         """
-        Get the tile from the MAP tsx file
+        Get the tile from the map.tsx file
         :return: List of tiles (pygame.Surface)
         """
         tile_file = self._root.find('tileset').attrib.get('source')
@@ -71,7 +71,7 @@ class MapParser(object):
     def split_tile(self, tile_file):
         """
         We have an image and we need to cut it in piece of 32 pixel by 32 pixel.
-        These cuts are tiles of the game
+        These cuts are the tiles of the game
         :param tile_file: path to the tile.tsx file
         :return: List of tiles (pygame.Surface)
         """
@@ -89,11 +89,3 @@ class MapParser(object):
                         self._tileWidth, self._tileHeight)
                 tiles.append(image.subsurface(rect))
         return tiles
-
-    def display_tile(self):
-        """
-        Testing purpose
-        """
-        pygame.display.get_surface()
-        for i, tile in enumerate(self.tile):
-            pygame.display.get_surface().blit(tile, (i*32, 0))

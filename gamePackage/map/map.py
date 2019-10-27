@@ -12,6 +12,13 @@ from gamePackage.sprite.teleporter import TeleporterManager
 
 class Map(object):
     def __init__(self, game, screen, map_file, map_timer):
+        """
+
+        :param game:
+        :param screen:
+        :param map_file:
+        :param map_timer:
+        """
         self.map = MapParser(map_file)
 
         # Timer for the map
@@ -20,14 +27,14 @@ class Map(object):
         self.delta_time = 0
         self.timer_done = False
 
-        self.__game = game
+        self._game = game
         self.screen = screen
-        # # Select a font for the game
-        # pygame.font.init()
-        # self.font = pygame.font.SysFont(constants.FONT, 50)
         self.render_map()
 
     def render_map(self):
+        """
+        Parse the
+        """
         tp_manager = TeleporterManager()
         for x, row in enumerate(self.map.map):
             for y, value in enumerate(row):
@@ -60,34 +67,34 @@ class Map(object):
         """
         res = None
         if tile_index == 0:
-            res = Wall(self.__game, values['tile'], values['x'], values['y'])
+            res = Wall(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 1:
-            res = Hole(self.__game, values['tile'], values['x'], values['y'])
+            res = Hole(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 2:
             # Careful here is hardcode -> The shot sprite of the turret has to be the tile next to the turret
             # print("xx", self.map.tile[tile_index+1])
-            res = Turret(self.__game, values['tile'], values['x'], values['y'], self.map.tile[tile_index+1], False)
+            res = Turret(self._game, values['tile'], values['x'], values['y'], self.map.tile[tile_index + 1], False)
         # Tile 3 is reserved for the turret shot
         elif tile_index == 4:
-            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self._game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 5:
-            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self._game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 6:
-            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self._game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 8:
-            res = Ground(self.__game, values['tile'], values['x'], values['y'])
+            res = Ground(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 9:
-            res = Finish(self.__game, values['tile'], values['x'], values['y'])
+            res = Finish(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 16:
-            Blind(self.__game, values['tile'], values['x'], values['y'])
+            Blind(self._game, values['tile'], values['x'], values['y'])
             # Quick fix so the blind tile is replaced by a ground tile after he moves for the first time
             values['tile'] = self.map.tile[8]
             res = self.render_tiles(8, values, tp_manager)
         return res
 
     def draw_static_sprites(self):
-        self.__game.static_sprites.draw(self.screen)
-        self.__game.static_sprites.update(self.screen)
+        self._game.static_sprites.draw(self.screen)
+        self._game.static_sprites.update(self.screen)
         # Update the whole screen
         pygame.display.update()
 
@@ -95,7 +102,7 @@ class Map(object):
         """
         Update sprites
         """
-        self.__game.blind.update()
+        self._game.blind.update()
         self.display_timer()
         pygame.display.update()
 
@@ -106,9 +113,9 @@ class Map(object):
         # FIXME : For now I draw the Ground sprite on each tick to override where the blind image was
         #         (Only if the blind moved)
         # if self.__game.blind.has_moved:
-        self.__game.all_sprites.draw(self.screen)
-        self.__game.blind.has_moved = False
-        self.__game.blind_sprite.draw(self.screen)
+        self._game.all_sprites.draw(self.screen)
+        self._game.blind.has_moved = False
+        self._game.blind_sprite.draw(self.screen)
 
     def display_game_over(self):
         self.display_message("GAME OVER", "Press Space to continue")
