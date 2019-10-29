@@ -13,18 +13,17 @@ from gamePackage.sprite.teleporter import TeleporterManager
 class Map(object):
     def __init__(self, game, screen, map_file, map_timer):
         """
-
-        :param game:
-        :param screen:
-        :param map_file:
-        :param map_timer:
+        :param game: Game object
+        :param screen: pygame.Screen object
+        :param map_file: string path for the map
+        :param map_timer: string timer of the map
         """
         self.map = MapParser(map_file)
 
         # Timer for the map
-        self.timer = int(map_timer)
-        self.clock = pygame.time.Clock()
-        self.delta_time = 0
+        self._timer = int(map_timer)
+        self._clock = pygame.time.Clock()
+        self._delta_time = 0
         self.timer_done = False
 
         self._game = game
@@ -33,10 +32,11 @@ class Map(object):
 
     def render_map(self):
         """
-        Parse the
+        Parse the 2 dimension array given by map parser.
+        Render the map using the id in the map array.
         """
         tp_manager = TeleporterManager()
-        for x, row in enumerate(self.map.map):
+        for x, row in enumerate(self.map.array_map):
             for y, value in enumerate(row):
                 values = {
                     'tile': self.map.tile[value - 1],  # value -1 because XML values start at 1 and the list of tiles start at 0
@@ -56,7 +56,7 @@ class Map(object):
 
     def render_tiles(self, tile_index, values, tp_manager):
         """
-        Render the tiles. The tile index is defined by how the tile image is drawn.
+        Render the tiles. Using the tile_index we know which image we need to give
         :param tile_index: int Tile index
         :param values: dict containing :
                         1. pygame.Surface the tile image
@@ -92,6 +92,9 @@ class Map(object):
         return res
 
     def draw_static_sprites(self):
+        """
+        Draw the static sprites on the screen
+        """
         self._game.static_sprites.draw(self.screen)
         self._game.static_sprites.update(self.screen)
         # Update the whole screen
@@ -107,7 +110,7 @@ class Map(object):
 
     def draw(self):
         """
-        Draw all the sprites
+        Draw all the sprites on the screen
         """
         # FIXME : For now I draw the Ground sprite on each tick to override where the blind image was
         #         (Only if the blind moved)
@@ -117,12 +120,23 @@ class Map(object):
         self._game.blind_sprite.draw(self.screen)
 
     def display_game_over(self):
+        """
+        Display game over message on the screen
+        """
         self.display_message("GAME OVER", "Press Space to continue")
 
     def display_end_level_message(self):
+        """
+        Display end level message on the screen
+        """
         self.display_message("GOOD JOB", "Press Space to go to next level")
 
     def display_message(self, text1, text2):
+        """
+        Display a message on the screen
+        :param text1: Main text to write
+        :param text2: Second text to write
+        """
         # TODO : This is ugly
         font1 = pygame.font.SysFont(constants.FONT, 50)
         font2 = pygame.font.SysFont(constants.FONT, 16)
@@ -131,12 +145,15 @@ class Map(object):
         self.screen.blit(displayed_text1, (constants.WIDTH / 2 - 95, constants.HEIGHT / 2))
         self.screen.blit(displayed_text2, (constants.WIDTH / 2 - 95, constants.HEIGHT / 2 + 32))
 
-    def display_timer(self, position='bot_right'):
-        self.timer -= self.delta_time
-        if self.timer <= 0:
+    def display_timer(self):
+        """
+        Display the timer on the screen
+        """
+        self._timer -= self._delta_time
+        if self._timer <= 0:
             self.timer_done = True
-        self.delta_time = self.clock.tick(30) / 1000
+        self._delta_time = self._clock.tick(30) / 1000
 
         font = pygame.font.SysFont(constants.FONT, 40)
-        text = font.render(str(int(self.timer)), 1, constants.FONT_COLOR)
-        self.screen.blit(text, (0, 0))
+        text = font.render(str(int(self._timer)), 1, constants.FONT_COLOR)
+        self.screen.blit(text, (32, 32))

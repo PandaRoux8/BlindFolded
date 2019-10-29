@@ -6,16 +6,22 @@ from xml.etree import ElementTree as ET
 
 class MapParser(object):
     def __init__(self, file):
+        """
+        :param file: path for the XML file containing the map
+        """
         self._file = ET.parse(file)
         self._root = ET.parse(file).getroot()
         self._width = self._get_width()
         self._height = self._get_height()
         self._tileHeight = self._get_tile_height()
         self._tileWidth = self._get_tile_width()
-        self.map = self.get_map()
+        self.array_map = self.get_map()
         self.tile = self.get_tile()
 
     def _get_width(self):
+        """
+        Get the width of the map from the XML file
+        """
         res = None
         if self._root.tag == 'map':
             res = self._root.attrib.get('width')
@@ -23,6 +29,9 @@ class MapParser(object):
         return res
 
     def _get_height(self):
+        """
+        Get height of the map from the XML file
+        """
         res = None
         if self._root.tag == 'map':
             res = self._root.attrib.get('height')
@@ -30,6 +39,9 @@ class MapParser(object):
         return res
 
     def _get_tile_width(self):
+        """
+        Get width of tiles from the XML file
+        """
         res = None
         if self._root.tag == 'map':
             res = self._root.attrib.get('tilewidth')
@@ -37,6 +49,9 @@ class MapParser(object):
         return res
 
     def _get_tile_height(self):
+        """
+        Get height of tiles from the XML file
+        """
         res = None
         if self._root.tag == 'map':
             res = self._root.attrib.get('tileheight')
@@ -44,6 +59,9 @@ class MapParser(object):
         return res
 
     def get_map(self):
+        """
+        Parse the given XML file and make a 2 dimension array with the tiles id
+        """
         # Don't take layer into account for now
         data = self._root.find('layer').find('data')
         data_clean = data.text.replace('\n', '')
