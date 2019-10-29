@@ -18,7 +18,9 @@ class Map(object):
         :param map_file: string path for the map
         :param map_timer: string timer of the map
         """
-        self.map = MapParser(map_file)
+        map_parser = MapParser(map_file)
+        self.array_map = map_parser.array_map
+        self.tiles = map_parser.tile
 
         # Timer for the map
         self._timer = int(map_timer)
@@ -36,10 +38,10 @@ class Map(object):
         Render the map using the id in the map array.
         """
         tp_manager = TeleporterManager()
-        for x, row in enumerate(self.map.array_map):
+        for x, row in enumerate(self.array_map):
             for y, value in enumerate(row):
                 values = {
-                    'tile': self.map.tile[value - 1],  # value -1 because XML values start at 1 and the list of tiles start at 0
+                    'tile': self.tiles[value - 1],  # value -1 because XML values start at 1 and the list of tiles start at 0
                     'x': x * 32,
                     'y': y * 32,
                 }
@@ -72,7 +74,7 @@ class Map(object):
             res = Hole(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 2:
             # Careful here is hardcode -> The shot sprite of the turret has to be the tile next to the turret
-            res = Turret(self._game, values['tile'], values['x'], values['y'], self.map.tile[tile_index + 1], False)
+            res = Turret(self._game, values['tile'], values['x'], values['y'], self.tiles[tile_index + 1], False)
         # Tile 3 is reserved for the turret shot
         elif tile_index == 4:
             tp_manager.create_teleporter(self._game, values['tile'], values['x'], values['y'], tile_index)
@@ -87,7 +89,7 @@ class Map(object):
         elif tile_index == 16:
             Blind(self._game, values['tile'], values['x'], values['y'])
             # Quick fix so the blind tile is replaced by a ground tile after he moves for the first time
-            values['tile'] = self.map.tile[8]
+            values['tile'] = self.tiles[8]
             res = self.render_tiles(8, values, tp_manager)
         return res
 
