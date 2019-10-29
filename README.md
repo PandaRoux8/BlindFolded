@@ -1,12 +1,7 @@
 IMPORTANT : 
 
-    - Timer on map (Fix it as it isn't updated on guide)
-    - Menu navigation
-    - Lobby menu
-    - Join game menu (Check if a server is up or not)
-    - Make menu more beautiful
     - Check if a server is up when starting blind
-    - Display waiting screen while connection
+    - Pause button ESC
     
 Things to implement for the game :
 
