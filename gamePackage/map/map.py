@@ -72,7 +72,6 @@ class Map(object):
             res = Hole(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 2:
             # Careful here is hardcode -> The shot sprite of the turret has to be the tile next to the turret
-            # print("xx", self.map.tile[tile_index+1])
             res = Turret(self._game, values['tile'], values['x'], values['y'], self.map.tile[tile_index + 1], False)
         # Tile 3 is reserved for the turret shot
         elif tile_index == 4:
