@@ -3,6 +3,7 @@ IMPORTANT :
     - Créer un tileset pour l'aveugle
     - Check if a server is up when starting blind
     - Pause button ESC
+    - Remove fields height width and tileHeight tileWidth in MapParser
     
 Things to implement for the game :
 
