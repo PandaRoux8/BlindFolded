@@ -11,12 +11,7 @@ class Client(object):
         """
         self._server_ip = server_ip
         self._socket = self.connect(server_ip)
-
-    def __del__(self):
-        """
-        Destructor to close all connection when this object is destroyed
-        """
-        self._socket.close()
+        self.game = None
 
     @staticmethod
     def connect(server_ip):
@@ -27,6 +22,7 @@ class Client(object):
         """
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((server_ip, constants.PORT))
+        sock.settimeout(0.01)
         return sock
 
     def send_new_map(self, map, map_timer):
@@ -69,6 +65,24 @@ class Client(object):
         data = "next_level:$".encode()
         self._socket.sendall(data)
 
+    def send_pause_game(self):
+        data = "pause_game$".encode()
+        self._socket.sendall(data)
+
+    def get_pause_game(self):
+        try:
+            data = self._socket.recv(256)
+        except socket.timeout as e:
+            data = None
+
+        if data:
+            data_wo_trail = data.decode().split('$')
+            # Remove last index as split() leaves an empty char at the end
+            del data_wo_trail[-1]
+            for data in data_wo_trail:
+                if data == 'pause_game':
+                    self.game.pause_game()
+
     def check_server_ready(self):
         """
         Check if the Guide is ready when we ask him to press space to get to the next level or retry the level
@@ -77,7 +91,11 @@ class Client(object):
             # Send the message until the server gives an answer
             data = "client_ready$".encode()
             self._socket.sendall(data)
-            data = self._socket.recv(256)
+            try:
+                data = self._socket.recv(256)
+            except socket.timeout as e:
+                data = None
+
             # print(data)
             if data:
                 data = data.decode()

@@ -1,5 +1,7 @@
+import pygame
 from gamePackage.game import AbstractGame
 from gamePackage.map.map import Map
+from gamePackage.menu.pause_menu import PauseMenu
 
 
 class GameGuide(AbstractGame):
@@ -28,9 +30,19 @@ class GameGuide(AbstractGame):
         """
         super(GameGuide, self)._run_game()
         if self.server:
-            self.server.blind = self.blind
-            self.server.game = self
+            if not self.server.blind:
+                self.server.blind = self.blind
+            if not self.server.game:
+                self.server.game = self
             self.server.listen()
+            self._check_keys()
+
+    def _check_keys(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            self.server.send_pause_game()
+            PauseMenu(self.screen)
+            self.server.check_client_ready()
 
     def reload_game(self, from_game_over=False):
         """
@@ -45,6 +57,10 @@ class GameGuide(AbstractGame):
         server = self.server
         del self
         GameGuide(screen, server)
+
+    def pause_game(self):
+        PauseMenu(self.screen)
+        self.server.check_client_ready()
 
     def exit_game(self):
         self.server.release()

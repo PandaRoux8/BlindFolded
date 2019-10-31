@@ -15,6 +15,7 @@ class AbstractGame:
         self.map = None  # .Map object -> This is where the current map of the game is stored
         self.blind = None  # .Blind object -> This is where the blind sprite is stored
         self._clock = pygame.time.Clock()  # Clock to set framerate later on
+        self.screen = screen
 
         # Set sprites groups
         self.all_sprites = pygame.sprite.Group()

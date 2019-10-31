@@ -4,15 +4,14 @@
     <list default="true" id="308e70ce-e79f-49c1-864b-95dea2cb591c" name="Default Changelist" comment="useless">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/game_blind.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game_blind.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/game_guide.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game_guide.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/map/map.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/map/map.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/map/map_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/map/map_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/menu/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/menu/blind_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/blind_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/menu/guide_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/guide_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePackage/menu/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/main_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/menu/ingame_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/pause_menu.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/network/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/network/client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/network/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/network/server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePackage/sprite/blind.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/sprite/blind.py" afterDir="false" />
@@ -43,8 +42,9 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gamePackage/__main__.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/map/tileset" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -54,11 +54,12 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/gamePackage/sprite" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/gamePackage" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/map/tileset" />
+      <recent name="$PROJECT_DIR$/gamePackage/sprite" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -180,7 +181,9 @@
       <workItem from="1571759837331" duration="12265000" />
       <workItem from="1571814041384" duration="3869000" />
       <workItem from="1572087312963" duration="6291000" />
-      <workItem from="1572110600819" duration="15740000" />
+      <workItem from="1572110600819" duration="17998000" />
+      <workItem from="1572172218755" duration="1868000" />
+      <workItem from="1572538436557" duration="10935000" />
     </task>
     <task id="LOCAL-00001" summary="Copy an other dir">
       <created>1559664798722</created>
@@ -294,7 +297,28 @@
       <option name="project" value="LOCAL" />
       <updated>1572104651419</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="WIP clean the code and add comments/method headers">
+      <created>1572130965877</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1572130965877</updated>
+    </task>
+    <task id="LOCAL-00018" summary="wip clean code">
+      <created>1572133058298</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1572133058298</updated>
+    </task>
+    <task id="LOCAL-00019" summary="wip refactor">
+      <created>1572202914314</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1572202914314</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -361,9 +385,12 @@
     <MESSAGE value="useless" />
     <MESSAGE value="update venv" />
     <MESSAGE value="wip" />
-    <option name="LAST_COMMIT_MESSAGE" value="wip" />
+    <MESSAGE value="WIP clean the code and add comments/method headers" />
+    <MESSAGE value="wip clean code" />
+    <MESSAGE value="wip refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="wip refactor" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/BlindFolded$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1572090015399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gamePackage" />
+    <SUITE FILE_PATH="coverage/BlindFolded$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1572538695967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gamePackage" />
   </component>
 </project>

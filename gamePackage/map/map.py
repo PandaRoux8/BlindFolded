@@ -11,14 +11,14 @@ from gamePackage.sprite.teleporter import TeleporterManager
 
 
 class Map(object):
-    def __init__(self, game, screen, map_file, map_timer):
+    def __init__(self, game, screen, map_file, map_timer, blind=False):
         """
         :param game: Game object
         :param screen: pygame.Screen object
         :param map_file: string path for the map
         :param map_timer: string timer of the map
         """
-        map_parser = MapParser(map_file)
+        map_parser = MapParser(map_file, blind)
         self.array_map = map_parser.array_map
         self.tiles = map_parser.tile
 

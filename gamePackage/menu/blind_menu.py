@@ -1,5 +1,8 @@
 import pygame
 import pygameMenu
+import errno
+from time import sleep
+from socket import error as socket_error
 from gamePackage import constants
 from gamePackage.menu import main_menu
 from gamePackage.game_blind import GameBlind
@@ -48,7 +51,16 @@ class BlindMenu(pygameMenu.Menu):
         Connect to the Guide server
         """
         input_data = self.get_input_data()
-        client = Client(input_data.get('ip'))
+        connected = False
+        while not connected:
+            try:
+                client = Client(input_data.get('ip'))
+                connected = True
+            except socket_error as e:
+                connected = False
+                if e.errno != errno.ECONNREFUSED:
+                    raise e
+            sleep(0.5)
         screen = self._screen
         del self
         GameBlind(screen, client)

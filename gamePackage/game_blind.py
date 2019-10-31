@@ -1,6 +1,7 @@
 import pygame
 from gamePackage.game import AbstractGame
 from gamePackage.map.map import Map
+from gamePackage.menu.pause_menu import PauseMenu
 from xml.etree import ElementTree as ET
 import xml.dom.minidom
 
@@ -28,7 +29,7 @@ class GameBlind(AbstractGame):
             self.map_path = "../map/%s" % map_name
         self.client.send_new_map(self.map_path, self.get_map_timer())
         # Load the map
-        self.map = Map(self, screen, self.map_path, self.get_map_timer())
+        self.map = Map(self, screen, self.map_path, self.get_map_timer(), blind=True)
         self.map.draw_static_sprites()
         super(GameBlind, self)._load_map(screen)
 
@@ -37,6 +38,9 @@ class GameBlind(AbstractGame):
         Inherit _run_game to add the check for the timer of the map.
         """
         super(GameBlind, self)._run_game()
+        if self.client:
+            self.client.game = self
+            self.client.get_pause_game()
         self.is_map_timer_done()
 
     def check_collision_with_walls(self, axis=None):
@@ -116,6 +120,10 @@ class GameBlind(AbstractGame):
         self.client.send_display_next_level()
         self.search_map()
         super(GameBlind, self).next_level()
+
+    def pause_game(self):
+        PauseMenu(self.screen)
+        self.client.check_server_ready()
 
     def exit_game(self):
         """

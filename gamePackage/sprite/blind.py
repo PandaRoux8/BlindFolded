@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from gamePackage.menu.ingame_menu import InGameMenu
+from gamePackage.menu.pause_menu import PauseMenu
 
 ALLOW_MOVE = pygame.USEREVENT + 1
 
@@ -56,11 +56,12 @@ class Blind(pygame.sprite.Sprite):
                 self._allow_move = False
                 pygame.time.set_timer(ALLOW_MOVE, 100)
 
-        # TODO : Implement this
-        # # Go to escape menu
-        # if keys[pygame.K_ESCAPE]:
-        #     menu = InGameMenu.get_instance(self._game.screen, (1600, 900))
-        #     menu.display_menu()
+        if keys[pygame.K_ESCAPE]:
+            # TODO : We have to put this in the game part
+            if type(self.__game).__name__ == "GameBlind":
+                self.__game.client.send_pause_game()
+                PauseMenu(self.__game.screen)
+                self.__game.client.check_server_ready()
 
     def update_position(self, pos_x, pos_y):
         """

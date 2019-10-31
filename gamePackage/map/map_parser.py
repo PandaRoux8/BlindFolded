@@ -5,20 +5,16 @@ from xml.etree import ElementTree as ET
 
 
 class MapParser(object):
-    def __init__(self, file):
+    def __init__(self, file, blind=False):
         """
         :param file: path for the XML file containing the map
         """
         self._file = ET.parse(file)
         self._root = ET.parse(file).getroot()
-        self._width = self._get_width()
-        self._height = self._get_height()
-        self._tileHeight = self._get_tile_height()
-        self._tileWidth = self._get_tile_width()
         self.array_map = self.get_map()
-        self.tile = self.get_tile()
+        self.tile = self.get_tile(blind)
 
-    def _get_width(self):
+    def get_width(self):
         """
         Get the width of the map from the XML file
         """
@@ -28,7 +24,7 @@ class MapParser(object):
             res = not res or int(res)
         return res
 
-    def _get_height(self):
+    def get_height(self):
         """
         Get height of the map from the XML file
         """
@@ -38,7 +34,7 @@ class MapParser(object):
             res = not res or int(res)
         return res
 
-    def _get_tile_width(self):
+    def get_tile_width(self):
         """
         Get width of tiles from the XML file
         """
@@ -48,7 +44,7 @@ class MapParser(object):
             res = not res or int(res)
         return res
 
-    def _get_tile_height(self):
+    def get_tile_height(self):
         """
         Get height of tiles from the XML file
         """
@@ -69,21 +65,27 @@ class MapParser(object):
         # Only support left-down for now
         map = []
         rows = []
+        width = self.get_width()
         for i, value in enumerate(data_clean.split(',')):
             rows.append(int(value))
             # Every time you reach the width of the map, make a new col
-            if (i+1) % self._width == 0:
+            if (i+1) % width == 0:
                 map.append(rows)
                 rows = []
         return map
 
-    def get_tile(self):
+    def get_tile(self, blind):
         """
         Get the tile from the map.tsx file
         :return: List of tiles (pygame.Surface)
         """
-        tile_file = self._root.find('tileset').attrib.get('source')
-        tile_path = constants.DIR_MAP + tile_file
+        if not blind:
+            tile_file = self._root.find('tileset').attrib.get('source')
+            tile_path = constants.DIR_MAP + tile_file
+        else:
+            tile_file = self._root.find('tileset').attrib.get('source')
+            tile_file = tile_file.replace("default_tileset.tsx", "blind_tileset.tsx")
+            tile_path = constants.DIR_MAP + tile_file
         return self.split_tile(tile_path)
 
     def split_tile(self, tile_file):
@@ -101,9 +103,11 @@ class MapParser(object):
         image_width, image_height = image.get_size()
         tiles = []
 
-        for x in range(int(image_width/self._tileWidth)):
-            for y in range(int(image_height/self._tileHeight)):
-                rect = (y*self._tileWidth, x*self._tileHeight,
-                        self._tileWidth, self._tileHeight)
+        tile_width = self.get_tile_width()
+        tile_height = self.get_tile_height()
+        for x in range(int(image_width/tile_width)):
+            for y in range(int(image_height/tile_height)):
+                rect = (y*tile_width, x*tile_height,
+                        tile_width, tile_height)
                 tiles.append(image.subsurface(rect))
         return tiles

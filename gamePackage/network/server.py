@@ -51,10 +51,10 @@ class Server(object):
                 data = data[:-1]
                 self._read_data(data)
             else:
-                datas = data.split('$')
+                data_wo_trail = data.split('$')
                 # Remove last index as split() leaves an empty char at the end
-                del datas[-1]
-                for data in datas:
+                del data_wo_trail[-1]
+                for data in data_wo_trail:
                     # Remove trailing char $
                     self._read_data(data)
 
@@ -76,6 +76,8 @@ class Server(object):
             self.game.game_over()
         elif 'next_level:' in data:
             self.game.next_level()
+        elif 'pause_game'in data:
+            self.game.pause_game()
 
     def _update_blind_position(self, data):
         """
@@ -86,9 +88,16 @@ class Server(object):
             x, y = data.split(';')
             self.blind.update_position(x, y)
 
+    def send_pause_game(self):
+        data = "pause_game$".encode()
+        self._connection.sendall(data)
+
     def check_client_ready(self):
         while True:
-            data = self._connection.recv(256)
+            try:
+                data = self._connection.recv(256)
+            except socket.timeout as e:
+                data = None
             # print(data)
             if data:
                 data = data.decode()
