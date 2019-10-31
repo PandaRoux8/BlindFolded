@@ -10,6 +10,8 @@ def get_header():
 # Name        : Jules Schluchter
 # Mail        : jules.schluchter@gmail.com
 # Date        : 22.10.2019
+# Package     : gamePackage
+# Project     : BlindFolded
 # -----------------------------------------
 
 """
@@ -38,6 +40,6 @@ def search_for_files(path):
 
 
 if __name__ == '__main__':
-    path = "/home/user/BlindFolded/gamePackage/"
+    path = "/home/jules/BlindFolded/gamePackage/"
     # path = "/home/user/test"
     search_for_files(path)

@@ -1,10 +1,17 @@
+# ------------------------------------------
+# Name        : Jules Schluchter
+# Mail        : jules.schluchter@gmail.com
+# Date        : 22.10.2019
+# Package     : gamePackage
+# Project     : BlindFolded
+# -----------------------------------------
+
 import pygame
 import pygameMenu
 from pygameMenu import locals
-from gamePackage import constants
-from gamePackage.menu.guide_menu import GuideMenu
-from gamePackage.menu.options import OptionsMenu
-from gamePackage.menu.blind_menu import BlindMenu
+import constants
+from menu.guide_menu import GuideMenu
+from menu.blind_menu import BlindMenu
 
 
 class MainMenu(pygameMenu.menu.Menu):

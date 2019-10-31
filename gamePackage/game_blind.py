@@ -1,7 +1,15 @@
+# ------------------------------------------
+# Name        : Jules Schluchter
+# Mail        : jules.schluchter@gmail.com
+# Date        : 22.10.2019
+# Package     : gamePackage
+# Project     : BlindFolded
+# -----------------------------------------
+
 import pygame
-from gamePackage.game import AbstractGame
-from gamePackage.map.map import Map
-from gamePackage.menu.pause_menu import PauseMenu
+from game import AbstractGame
+from map.map import Map
+from menu.pause_menu import PauseMenu
 from xml.etree import ElementTree as ET
 import xml.dom.minidom
 

@@ -1,12 +1,20 @@
+# ------------------------------------------
+# Name        : Jules Schluchter
+# Mail        : jules.schluchter@gmail.com
+# Date        : 22.10.2019
+# Package     : gamePackage
+# Project     : BlindFolded
+# -----------------------------------------
+
 import pygame
 import pygameMenu
 import errno
 from time import sleep
 from socket import error as socket_error
-from gamePackage import constants
-from gamePackage.menu import main_menu
-from gamePackage.game_blind import GameBlind
-from gamePackage.network.client import Client
+import constants
+from menu import main_menu
+from game_blind import GameBlind
+from network.client import Client
 
 
 class BlindMenu(pygameMenu.Menu):

@@ -1,6 +1,21 @@
+# ------------------------------------------
+# Name        : Jules Schluchter
+# Mail        : jules.schluchter@gmail.com
+# Date        : 22.10.2019
+# Package     : gamePackage
+# Project     : BlindFolded
+# -----------------------------------------
+
+# ------------------------------------------
+# Name        : Jules Schluchter
+# Mail        : jules.schluchter@gmail.com
+# Date        : 22.10.2019
+# Package     : gamePackage
+# Project     : BlindFolded
+# -----------------------------------------
+
 import pygame
-from pygame.locals import *
-from gamePackage.menu.pause_menu import PauseMenu
+from menu.pause_menu import PauseMenu
 
 ALLOW_MOVE = pygame.USEREVENT + 1
 

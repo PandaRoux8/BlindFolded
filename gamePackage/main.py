@@ -1,6 +1,16 @@
+# ------------------------------------------
+# Name        : Jules Schluchter
+# Mail        : jules.schluchter@gmail.com
+# Date        : 22.10.2019
+# Package     : gamePackage
+# Project     : BlindFolded
+# -----------------------------------------
+
 import pygame
-from gamePackage import constants
-from gamePackage.menu import main_menu
+import constants
+from menu import main_menu
+# from gamePackage import constants
+# from gamePackage.menu import main_menu
 
 if __name__ == "__main__":
     # Initialize pygame

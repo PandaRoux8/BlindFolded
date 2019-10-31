@@ -1,13 +1,21 @@
+# ------------------------------------------
+# Name        : Jules Schluchter
+# Mail        : jules.schluchter@gmail.com
+# Date        : 22.10.2019
+# Package     : gamePackage
+# Project     : BlindFolded
+# -----------------------------------------
+
 import pygame
-from gamePackage import constants
-from gamePackage.map.map_parser import MapParser
-from gamePackage.sprite.ground import Ground
-from gamePackage.sprite.blind import Blind
-from gamePackage.sprite.wall import Wall
-from gamePackage.sprite.hole import Hole
-from gamePackage.sprite.turret import Turret
-from gamePackage.sprite.finish import Finish
-from gamePackage.sprite.teleporter import TeleporterManager
+import constants
+from map.map_parser import MapParser
+from sprite.ground import Ground
+from sprite.blind import Blind
+from sprite.wall import Wall
+from sprite.hole import Hole
+from sprite.turret import Turret
+from sprite.finish import Finish
+from sprite.teleporter import TeleporterManager
 
 
 class Map(object):
