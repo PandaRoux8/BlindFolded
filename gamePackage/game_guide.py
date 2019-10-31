@@ -38,10 +38,8 @@ class GameGuide(AbstractGame):
         """
         super(GameGuide, self)._run_game()
         if self.server:
-            if not self.server.blind:
-                self.server.blind = self.blind
-            if not self.server.game:
-                self.server.game = self
+            self.server.blind = self.blind
+            self.server.game = self
             self.server.listen()
             self._check_keys()
 

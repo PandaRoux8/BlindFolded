@@ -40,6 +40,7 @@ def search_for_files(path):
 
 
 if __name__ == '__main__':
+    raise Exception
     path = "/home/jules/BlindFolded/gamePackage/"
     # path = "/home/user/test"
     search_for_files(path)
