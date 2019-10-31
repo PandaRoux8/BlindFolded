@@ -5,8 +5,13 @@ import pygame
 class Finish(pygame.sprite.Sprite):
 
     def __init__(self, game, tile, x, y):
+        """
+        :param game: Game object
+        :param tile: image for the sprite
+        :param x: int for x axis position
+        :param y: int for y axis position
+        """
         super(Finish, self).__init__()
-        self.__game = game
         self.image = tile
         self.rect = self.image.get_rect()
         self.rect.x = x

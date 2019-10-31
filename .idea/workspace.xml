@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="308e70ce-e79f-49c1-864b-95dea2cb591c" name="Default Changelist" comment="useless">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/game_blind.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game_blind.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/game_guide.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/game_guide.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/map/map.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/map/map.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/map/map_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/map/map_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/menu/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/menu/blind_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/blind_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/menu/ingame_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/menu/pause_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/network/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/network/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/network/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/network/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePackage/sprite/blind.py" beforeDir="false" afterPath="$PROJECT_DIR$/gamePackage/sprite/blind.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/map_order.xml" beforeDir="false" afterPath="$PROJECT_DIR$/map/map_order.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Q2x59KmH6pc0CS7zN2pWkQYgO3" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/map/tileset" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings>
+        <option name="useSoftWraps" value="true" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gamePackage" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/map/tileset" />
+      <recent name="$PROJECT_DIR$/gamePackage/sprite" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.__main__">
+    <configuration name="__main__" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="BlindFolded" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gamePackage" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gamePackage/__main__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="lobby" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BlindFolded" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gamePackage/menu" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gamePackage/menu/guide_menu.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="socket" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BlindFolded" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gamePackage/socket" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gamePackage/socket/server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.__main__" />
+      <item itemvalue="Python.lobby" />
+      <item itemvalue="Python.socket" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.lobby" />
+        <item itemvalue="Python.socket" />
+        <item itemvalue="Python.socket" />
+        <item itemvalue="Python.socket" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="AUTOSCROLL_FROM_SOURCE" value="true" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="308e70ce-e79f-49c1-864b-95dea2cb591c" name="Default Changelist" comment="" />
+      <created>1559664735632</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1559664735632</updated>
+      <workItem from="1560162467849" duration="16243000" />
+      <workItem from="1560193937534" duration="3018000" />
+      <workItem from="1560271361563" duration="5508000" />
+      <workItem from="1560505558382" duration="2766000" />
+      <workItem from="1560878087970" duration="480000" />
+      <workItem from="1561032202158" duration="4952000" />
+      <workItem from="1561117211438" duration="1586000" />
+      <workItem from="1561200970469" duration="599000" />
+      <workItem from="1561202820180" duration="1839000" />
+      <workItem from="1561305821824" duration="4869000" />
+      <workItem from="1561481753910" duration="2162000" />
+      <workItem from="1566982308807" duration="2173000" />
+      <workItem from="1571759837331" duration="12265000" />
+      <workItem from="1571814041384" duration="3869000" />
+      <workItem from="1572087312963" duration="6291000" />
+      <workItem from="1572110600819" duration="17998000" />
+      <workItem from="1572172218755" duration="1868000" />
+      <workItem from="1572538436557" duration="10935000" />
+    </task>
+    <task id="LOCAL-00001" summary="Copy an other dir">
+      <created>1559664798722</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559664798722</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Push venv">
+      <created>1559664894390</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1559664894390</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Push venv">
+      <created>1559664906817</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1559664906817</updated>
+    </task>
+    <task id="LOCAL-00004" summary="It works">
+      <created>1559670877023</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1559670877023</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated map for holes">
+      <created>1559681149626</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1559681149626</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Tried out socket + little update on the game">
+      <created>1559939894170</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1559939894170</updated>
+    </task>
+    <task id="LOCAL-00007" summary="little optimisation, added game_over screen +  turret and finish tile">
+      <created>1560035330808</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1560035330808</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Turret + turret shot">
+      <created>1560038028557</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1560038028557</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Working before refactor for MVC">
+      <created>1560086343647</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1560086343647</updated>
+    </task>
+    <task id="LOCAL-00010" summary="wip">
+      <created>1560089262610</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1560089262610</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Implemented telporter + updated code to be more MVC">
+      <created>1560178358928</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1560178358928</updated>
+    </task>
+    <task id="LOCAL-00012" summary="wip">
+      <created>1560185826395</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1560185826395</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Game is working fine. Added limitation for the moves of the player">
+      <created>1560275034657</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1560275034657</updated>
+    </task>
+    <task id="LOCAL-00014" summary="useless">
+      <created>1560275121649</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1560275121649</updated>
+    </task>
+    <task id="LOCAL-00015" summary="update venv">
+      <created>1572098555006</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1572098555006</updated>
+    </task>
+    <task id="LOCAL-00016" summary="wip">
+      <created>1572104651419</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1572104651419</updated>
+    </task>
+    <task id="LOCAL-00017" summary="WIP clean the code and add comments/method headers">
+      <created>1572130965877</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1572130965877</updated>
+    </task>
+    <task id="LOCAL-00018" summary="wip clean code">
+      <created>1572133058298</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1572133058298</updated>
+    </task>
+    <task id="LOCAL-00019" summary="wip refactor">
+      <created>1572202914314</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1572202914314</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Copy an other dir" />
+    <MESSAGE value="Push venv" />
+    <MESSAGE value="It works" />
+    <MESSAGE value="Updated map for holes" />
+    <MESSAGE value="Tried out socket + little update on the game" />
+    <MESSAGE value="little optimisation, added game_over screen +  turret and finish tile" />
+    <MESSAGE value="Turret + turret shot" />
+    <MESSAGE value="Working before refactor for MVC" />
+    <MESSAGE value="Implemented telporter" />
+    <MESSAGE value="Implemented telporter + updated code to be more MVC" />
+    <MESSAGE value="Game is working fine. Added limitation for the moves of the player" />
+    <MESSAGE value="useless" />
+    <MESSAGE value="update venv" />
+    <MESSAGE value="wip" />
+    <MESSAGE value="WIP clean the code and add comments/method headers" />
+    <MESSAGE value="wip clean code" />
+    <MESSAGE value="wip refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="wip refactor" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/BlindFolded$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1572538695967" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gamePackage" />
+  </component>
+</project>

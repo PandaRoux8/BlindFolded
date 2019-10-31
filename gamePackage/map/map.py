@@ -1,4 +1,5 @@
 import pygame
+from gamePackage import constants
 from gamePackage.map.map_parser import MapParser
 from gamePackage.sprite.ground import Ground
 from gamePackage.sprite.blind import Blind
@@ -10,28 +11,37 @@ from gamePackage.sprite.teleporter import TeleporterManager
 
 
 class Map(object):
-    def __init__(self, game, screen, map_file, map_timer):
-        self.map = MapParser(map_file)
+    def __init__(self, game, screen, map_file, map_timer, blind=False):
+        """
+        :param game: Game object
+        :param screen: pygame.Screen object
+        :param map_file: string path for the map
+        :param map_timer: string timer of the map
+        """
+        map_parser = MapParser(map_file, blind)
+        self.array_map = map_parser.array_map
+        self.tiles = map_parser.tile
 
         # Timer for the map
-        self.timer = int(map_timer)
-        self.clock = pygame.time.Clock()
-        self.delta_time = 0
+        self._timer = int(map_timer)
+        self._clock = pygame.time.Clock()
+        self._delta_time = 0
         self.timer_done = False
 
-        self.__game = game
+        self._game = game
         self.screen = screen
-        # Select a font for the game
-        pygame.font.init()
-        self.font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
         self.render_map()
 
     def render_map(self):
+        """
+        Parse the 2 dimension array given by map parser.
+        Render the map using the id in the map array.
+        """
         tp_manager = TeleporterManager()
-        for x, row in enumerate(self.map.map):
+        for x, row in enumerate(self.array_map):
             for y, value in enumerate(row):
                 values = {
-                    'tile': self.map.tile[value - 1],  # value -1 because XML values start at 1 and the list of tiles start at 0
+                    'tile': self.tiles[value - 1],  # value -1 because XML values start at 1 and the list of tiles start at 0
                     'x': x * 32,
                     'y': y * 32,
                 }
@@ -48,7 +58,7 @@ class Map(object):
 
     def render_tiles(self, tile_index, values, tp_manager):
         """
-        Render the tiles. The tile index is defined by how the tile image is drawn.
+        Render the tiles. Using the tile_index we know which image we need to give
         :param tile_index: int Tile index
         :param values: dict containing :
                         1. pygame.Surface the tile image
@@ -59,34 +69,36 @@ class Map(object):
         """
         res = None
         if tile_index == 0:
-            res = Wall(self.__game, values['tile'], values['x'], values['y'])
+            res = Wall(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 1:
-            res = Hole(self.__game, values['tile'], values['x'], values['y'])
+            res = Hole(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 2:
             # Careful here is hardcode -> The shot sprite of the turret has to be the tile next to the turret
-            # print("xx", self.map.tile[tile_index+1])
-            res = Turret(self.__game, values['tile'], values['x'], values['y'], self.map.tile[tile_index+1], False)
+            res = Turret(self._game, values['tile'], values['x'], values['y'], self.tiles[tile_index + 1], False)
         # Tile 3 is reserved for the turret shot
         elif tile_index == 4:
-            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self._game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 5:
-            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self._game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 6:
-            tp_manager.create_teleporter(self.__game, values['tile'], values['x'], values['y'], tile_index)
+            tp_manager.create_teleporter(self._game, values['tile'], values['x'], values['y'], tile_index)
         elif tile_index == 8:
-            res = Ground(self.__game, values['tile'], values['x'], values['y'])
+            res = Ground(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 9:
-            res = Finish(self.__game, values['tile'], values['x'], values['y'])
+            res = Finish(self._game, values['tile'], values['x'], values['y'])
         elif tile_index == 16:
-            Blind(self.__game, values['tile'], values['x'], values['y'])
+            Blind(self._game, values['tile'], values['x'], values['y'])
             # Quick fix so the blind tile is replaced by a ground tile after he moves for the first time
-            values['tile'] = self.map.tile[8]
+            values['tile'] = self.tiles[8]
             res = self.render_tiles(8, values, tp_manager)
         return res
 
     def draw_static_sprites(self):
-        self.__game.static_sprites.draw(self.screen)
-        self.__game.static_sprites.update(self.screen)
+        """
+        Draw the static sprites on the screen
+        """
+        self._game.static_sprites.draw(self.screen)
+        self._game.static_sprites.update(self.screen)
         # Update the whole screen
         pygame.display.update()
 
@@ -94,41 +106,56 @@ class Map(object):
         """
         Update sprites
         """
-        self.__game.blind.update()
+        self._game.blind.update()
         self.display_timer()
         pygame.display.update()
 
     def draw(self):
         """
-        Draw all the sprites
+        Draw all the sprites on the screen
         """
         # FIXME : For now I draw the Ground sprite on each tick to override where the blind image was
         #         (Only if the blind moved)
         # if self.__game.blind.has_moved:
-        self.__game.all_sprites.draw(self.screen)
-        self.__game.blind.has_moved = False
-        self.__game.blind_sprite.draw(self.screen)
+        self._game.all_sprites.draw(self.screen)
+        self._game.blind.has_moved = False
+        self._game.blind_sprite.draw(self.screen)
 
     def display_game_over(self):
-        # TODO : It's ugly but it works !
-        text = self.font.render("GAME OVER", 1, (255, 255, 255))
-        font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
-        text2 = font2.render("Press Space to continue", 1, (255, 255, 255))
-        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
-        self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
+        """
+        Display game over message on the screen
+        """
+        self.display_message("GAME OVER", "Press Space to continue")
 
     def display_end_level_message(self):
-        text = self.font.render("GOOD JOB ", 1, (255, 255, 255))
-        font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
-        text2 = font2.render("Press Space to go to next level", 1, (255, 255, 255))
-        self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
-        self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
+        """
+        Display end level message on the screen
+        """
+        self.display_message("GOOD JOB", "Press Space to go to next level")
 
-    def display_timer(self, position='bot_right'):
-        self.timer -= self.delta_time
-        if self.timer <= 0:
+    def display_message(self, text1, text2):
+        """
+        Display a message on the screen
+        :param text1: Main text to write
+        :param text2: Second text to write
+        """
+        # TODO : This is ugly
+        font1 = pygame.font.SysFont(constants.FONT, 50)
+        font2 = pygame.font.SysFont(constants.FONT, 16)
+        displayed_text1 = font1.render(text1, 1, constants.FONT_COLOR)
+        displayed_text2 = font2.render(text2, 1, constants.FONT_COLOR)
+        self.screen.blit(displayed_text1, (constants.WIDTH / 2 - 95, constants.HEIGHT / 2))
+        self.screen.blit(displayed_text2, (constants.WIDTH / 2 - 95, constants.HEIGHT / 2 + 32))
+
+    def display_timer(self):
+        """
+        Display the timer on the screen
+        """
+        self._timer -= self._delta_time
+        if self._timer <= 0:
             self.timer_done = True
-        self.delta_time = self.clock.tick(30) / 1000
+        self._delta_time = self._clock.tick(30) / 1000
 
-        text = self.font.render(str(int(self.timer)), 1, (255, 255, 255))
-        self.screen.blit(text, (0, 0))
+        font = pygame.font.SysFont(constants.FONT, 40)
+        text = font.render(str(int(self._timer)), 1, constants.FONT_COLOR)
+        self.screen.blit(text, (32, 32))

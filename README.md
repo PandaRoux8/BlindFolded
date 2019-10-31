@@ -1,10 +1,8 @@
 IMPORTANT : 
 
-    - Timer on map (Fix it as it isn't updated on guide)
-    - Menu navigation
-    - Lobby menu
-    - Join game menu (Check if a server is up or not)
-    - Make menu more beautiful
+    - Remove options/keys menu in master
+    - Run header script
+    - Show waiting screen while connecting
     
 Things to implement for the game :
 
@@ -24,36 +22,6 @@ Things to implement for the game :
   Socket : 
   - Manage disconnect error..
   - Search for friend on the local network ?
-  - Find a way to close the connection every time
-
- Map class :
- 
-    - A special tile to go from a map to another (Loads the map)
-    - Replace the tile where the player spawned by a ground tile -> Check this with layer maybe (This is quickfixed)
-
- Map Parser class :
-    - The display is wrong -> The screen is flipped in a weird way
-
-Type of tiles :
- 
-    - Pit
-    - Ground
-    - Action Tile (Bumper, map rotation etc.)
-    
-
-Character class:
-
-    - Action
-    - Give action to the character (plant a tree)
-    - Direction of the char (display)
-
-
-
-General idea :
-
-    - 2 player game cooperation
-    - Blind 1 don't see the map and has to be guided by the Blind 2
-    - ? Blind 2 can place item on the map (like bridge)
 
 Item on the map :
 
@@ -67,8 +35,6 @@ Item on the map :
     - ? Piège à désactiver par P2
  
     - Puzzle avec forme (Keep talking and nobody explode)
- 
-SOCKET : https://realpython.com/python-sockets/#echo-client-and-server
 
 OTHERS :
 

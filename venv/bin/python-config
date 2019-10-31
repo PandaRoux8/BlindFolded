@@ -1,4 +1,4 @@
-#!/home/jules/myGame/venv/bin/python
+#!/home/jules/BlindFolded/venv/bin/python
 
 import sys
 import getopt

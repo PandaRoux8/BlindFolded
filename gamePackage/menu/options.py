@@ -1,19 +1,19 @@
 # coding: utf-8
 import pygame
 import pygameMenu
+from gamePackage import constants
 from gamePackage.menu.keys_menu import KeysMenu
 
 
 # Singleton object
 class OptionsMenu(pygameMenu.menu.Menu):
-    def __init__(self, screen, resolution):
+    def __init__(self, screen):
         self.screen = screen
-        self.width = resolution[0]
-        self.height = resolution[1]
+
         # set a default display
         # self.display = None
-        super(OptionsMenu, self).__init__(self.screen, self.width, self.height, pygameMenu.fonts.FONT_NEVIS,
-                               'Options', bgfun=lambda: self.screen.fill((0, 255, 100)))
+        super(OptionsMenu, self).__init__(self.screen, constants.WIDTH, constants.HEIGHT, constants.FONT,
+                                          constants.WINDOW_TITLE, bgfun=lambda: self.screen.fill(constants.MENU_COLOR))
         OptionsMenu.__instance = self
         self.display_menu()
 

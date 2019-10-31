@@ -1,22 +1,23 @@
 import sys
 import pygame
-from gamePackage.map.map import Map
+from gamePackage import constants
 
 
 class AbstractGame:
+    """
+    Abstract class for the game with the base fields and the base function.
+    """
 
     def __init__(self, screen):
-        # Map loaded in the game
-        self.map = None
-        # Character of the player
-        self.blind = None
+        """
+        :param screen:  pygame.Screen object
+        """
+        self.map = None  # .Map object -> This is where the current map of the game is stored
+        self.blind = None  # .Blind object -> This is where the blind sprite is stored
+        self._clock = pygame.time.Clock()  # Clock to set framerate later on
+        self.screen = screen
 
-        # TODO : Get these from __main__ ? Or from a file ?
-        # Game clock
-        self.clock = pygame.time.Clock()
-        self.framerate = 15
-
-        # Set the sprite groups
+        # Set sprites groups
         self.all_sprites = pygame.sprite.Group()
         self.static_sprites = pygame.sprite.Group()
         self.block_sprites = pygame.sprite.Group()
@@ -25,22 +26,31 @@ class AbstractGame:
         self.teleporter_sprites = pygame.sprite.Group()
         self.blind_sprite = pygame.sprite.Group()
 
-        self.load_map(screen)
-        self.start_game()
+        self._load_map(screen)
+        self._start_game()
 
-    def load_map(self, screen):
+    def _load_map(self, screen):
+        """
+        Abstract method to be implemented
+        This method should load the map
+        :param screen: pygame.Screen object
+        """
         pass
 
-    def start_game(self):
-        # While true here and not in run game, so we can inherit run_game method and add things to do in the loop
+    def _start_game(self):
+        """
+        Start the main loop of the game
+        """
+        # While true here and not in run game, so we can inherit run_game method and add stuff in the loop
         while True:
-            self.run_game()
+            self._run_game()
 
-    def run_game(self):
-        self.clock.tick(self.framerate)
-        self.blind.check_exit_game()
-        # Tick for the framerate
-        # TODO : FIXME : Find out how this really works so it can be optimized (drawing updating etc.)
+    def _run_game(self):
+        """
+        Run the main function for the game to work
+        """
+        self._check_exit_game()
+        self._clock.tick(constants.FRAMERATE)
         self.map.draw()
         self.map.update()
 
@@ -48,39 +58,45 @@ class AbstractGame:
         """
         Display game over on screen
         Restart a new game
-        :return:
         """
         self.map.display_game_over()
         while not pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.event.pump()
             pygame.display.flip()
-            self.clock.tick(30)
+            self._clock.tick(constants.FRAMERATE)
         self.reload_game(from_game_over=True)
 
     def reload_game(self, from_game_over=False):
         """
+        Abstract Method
         Reload a new game on the same map
         Delete the old instance of the game and start a new one
+        :param from_game_over : from_game_over is True we load the current map, otherwise we load the next map
         """
         pass
 
-    # TODO Merge the 2 functions below
     def next_level(self):
+        """
+        Display the end level message and reload the game with the next map
+        """
         self.map.display_end_level_message()
         while not pygame.key.get_pressed()[pygame.K_SPACE]:
             pygame.event.pump()
             pygame.display.flip()
-            self.clock.tick(30)
-        self.reload_game()
-
-    def load_next_map(self):
-        self.map.display_end_level_message()
-        while not pygame.key.get_pressed()[pygame.K_SPACE]:
-            pygame.event.pump()
-            pygame.display.flip()
-            self.clock.tick(30)
+            self._clock.tick(constants.FRAMERATE)
         self.reload_game()
 
     def exit_game(self):
+        """
+        Exit the game
+        """
         pygame.quit()
         sys.exit()
+
+    def _check_exit_game(self):
+        """
+        Check if the player asked to exit the game
+        """
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.exit_game()

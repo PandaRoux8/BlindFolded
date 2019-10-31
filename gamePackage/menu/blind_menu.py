@@ -1,53 +1,75 @@
 import pygame
-from gamePackage.game_blind import GameBlind
 import pygameMenu
+import errno
+from time import sleep
+from socket import error as socket_error
+from gamePackage import constants
+from gamePackage.menu import main_menu
+from gamePackage.game_blind import GameBlind
 from gamePackage.network.client import Client
 
 
 class BlindMenu(pygameMenu.Menu):
 
-    def __init__(self, screen, resolution):
-        # Init the screen size
-        self.screen = screen
-        self._width = resolution[0]
-        self._height = resolution[1]
-        self.font = pygameMenu.font.FONT_NEVIS
-        super(BlindMenu, self).__init__(self.screen, self._width, self._height, self.font, 'Connection Menu',
-                                        bgfun=lambda: self.screen.fill((0, 255, 100)))
-        # TODO : Show the lobby menu ... And start the game afterward
-        self.display_menu()
-        # Straight up start the game for testing purpose
-        # GameBlind(self.screen, client)
-        # client.release()
+    def __init__(self, screen):
+        """
+        :param screen: pygame.Screen object
+        """
+        self._screen = screen
+        super(BlindMenu, self).__init__(self._screen, constants.WIDTH, constants.HEIGHT, constants.FONT,
+                                        constants.WINDOW_TITLE, bgfun=lambda: self._screen.fill(constants.MENU_BG_COLOR),
+                                        menu_color_title=constants.MENU_COLOR_TITLE)
+        self._set_widgets()
+        self._display_menu()
 
-    def connect(self):
-        input_data = self.get_input_data()
-        client = Client(input_data.get('ip'))
-        screen = self.screen
-        self.disable()
-        del self
-        GameBlind(screen, client)
-        client.release()
+    def _set_widgets(self):
+        """
+        Set the widgets for the menu
+        """
+        self.add_text_input("IP Address : ", textinput_id='ip', default='127.0.0.1', input_underline="_", maxchar=15)
+        self.add_option("Connect", lambda: self._connect())
+        self.add_option("Back", lambda: self._back_to_main_menu())
 
-    def display_menu(self):
-        self.add_text_input("IP Address : ", textinput_id='ip', default='127.0.0.1', input_underline="_")
-        self.add_option("Connect", lambda: self.connect())
-        # TODO : Make this work
-        self.add_option("Back", lambda: self._close())
+    def _display_menu(self):
+        """
+        Display the menu
+        """
+        self.enable()
         events = pygame.event.get()
         self.mainloop(events)
 
-    # def display_menu(self):
-    #     text = self.font.render("GOOD JOB ", 1, (255, 255, 255))
-    #     font2 = pygame.font.SysFont(pygame.font.get_default_font(), 16)
-    #     text2 = font2.render("Press Space to go to next level", 1, (255, 255, 255))
-    #     self.screen.blit(text, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2))
-    #     self.screen.blit(text2, (self.screen.get_width() / 2 - 95, self.screen.get_height() / 2 + 32))
-    #
-    #     while not pygame.key.get_pressed()[pygame.K_SPACE]:
-    #         pygame.event.pump()
-    #         pygame.display.flip()
-    #         self.clock.tick(30)
-    #
-    # def start_game(self):
-    #     self.disable()
+    def _back_to_main_menu(self):
+        """
+        Deletes the current menu, and init the .MainMenu
+        """
+        screen = self._screen
+        del self
+        main_menu.MainMenu(screen)
+
+    def _connect(self):
+        """
+        Connect to the Guide server
+        """
+        input_data = self.get_input_data()
+        connected = False
+        while not connected:
+            try:
+                client = Client(input_data.get('ip'))
+                connected = True
+            except socket_error as e:
+                connected = False
+                if e.errno != errno.ECONNREFUSED:
+                    raise e
+            sleep(0.5)
+        screen = self._screen
+        del self
+        GameBlind(screen, client)
+        BlindMenu.stop_client(client)
+
+    @staticmethod
+    def stop_client(client):
+        """
+        Close the connection with the server and close the client
+        :param client: .Client object
+        """
+        client.release()
