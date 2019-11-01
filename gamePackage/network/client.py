@@ -9,6 +9,7 @@
 import socket
 from time import sleep
 import constants
+import errno
 
 
 class Client(object):
@@ -80,8 +81,12 @@ class Client(object):
     def get_pause_game(self):
         try:
             data = self._socket.recv(256)
-        except socket.timeout as e:
+        except socket.timeout:
             data = None
+        except socket.error as e:
+            data = None
+            if e.errno != errno.ECONNRESET:
+                raise e
 
         if data:
             data_wo_trail = data.decode().split('$')
@@ -103,6 +108,10 @@ class Client(object):
                 data = self._socket.recv(256)
             except socket.timeout as e:
                 data = None
+            except socket.error as e:
+                data = None
+                if e.errno != errno.ECONNRESET:
+                    raise e
 
             # print(data)
             if data:

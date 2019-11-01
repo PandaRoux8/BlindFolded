@@ -7,6 +7,7 @@
 # -----------------------------------------
 
 import socket
+import errno
 import constants
 
 
@@ -48,8 +49,14 @@ class Server(object):
             # If we don't receive any data during the timeout an exception is raised, we just need to wait until we have
             # a data, and not being stuck on receive
             data = self._connection.recv(256)
+
         except socket.timeout:
             data = None
+        except socket.error as e:
+            data = None
+            if e.errno != errno.ECONNRESET:
+                raise e
+
         if data:
             # print(data)
             data = data.decode()
@@ -105,6 +112,10 @@ class Server(object):
                 data = self._connection.recv(256)
             except socket.timeout as e:
                 data = None
+            except socket.error as e:
+                data = None
+                if e.errno != errno.ECONNRESET:
+                    raise e
             # print(data)
             if data:
                 data = data.decode()
