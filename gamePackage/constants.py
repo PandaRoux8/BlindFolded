@@ -4,10 +4,9 @@
 # Date        : 22.10.2019
 # Package     : gamePackage
 # Project     : BlindFolded
+# Description : Constants for the game
 # -----------------------------------------
 
-# Description : Constant for the game
-import pygameMenu
 
 # MENU CONFIGURATION
 MENU_BG_COLOR = (186, 190, 196)
@@ -15,7 +14,8 @@ MENU_BG_COLOR = (186, 190, 196)
 MENU_COLOR_TITLE = (108, 115, 126)
 
 # FONT FOR THE GAME
-FONT = pygameMenu.font.FONT_HELVETICA
+# FONT = pygameMenu.font.FONT_HELVETICA
+FONT = "../misc/helvetica.ttf"
 FONT_COLOR = (255, 255, 255)
 
 # MISC. CONFIGURATION FOR THE GAME

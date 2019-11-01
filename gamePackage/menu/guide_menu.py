@@ -31,7 +31,6 @@ class GuideMenu(pygameMenu.Menu):
         """
         Set the widgets for the menu
         """
-        self.add_text_input("IP Address : ", textinput_id='ip', default='127.0.0.1', input_underline="_", maxchar=15)
         self.add_option("Connect", lambda: self._connect())
         self.add_option("Back", lambda: self._back_to_main_menu())
 
@@ -69,7 +68,7 @@ class GuideMenu(pygameMenu.Menu):
         :param ip_address: ip address of the client
         :return .Server object
         """
-        server = Server(ip_address)
+        server = Server()
         # This method ends when a connection is made
         server.start_server()
         return server

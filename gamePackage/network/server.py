@@ -12,8 +12,7 @@ import constants
 
 class Server(object):
 
-    def __init__(self, client_ip):
-        self._client_ip = client_ip
+    def __init__(self):
         self._socket = None
         self._connection = None
         self._address = None
@@ -35,7 +34,7 @@ class Server(object):
         """
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self._socket.bind((self._client_ip, constants.PORT))
+        self._socket.bind(('', constants.PORT))
         self._socket.listen(constants.PORT)
         self._connection, self._address = self._socket.accept()
         # Set a timeout on the connection otherwise the system will be stuck on recv() until it receive some data
